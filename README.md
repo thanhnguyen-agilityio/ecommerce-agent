@@ -55,11 +55,11 @@ Deployed version: (coming soon)
 ### ⬇️ Clone repo
 - Clone repo with branch
   ```bash
-  git clone git@gitlab.asoft-python.com:thanh.nguyen/llm-training.git -b feat/langchain-advanced-practice
+  git clone git@github.com:thanhnguyen-agilityio/ivymoda-agent.git
   ```
 - Access project folder
   ```bash
-  cd llm-training/3-practice/3-5-chat-IVY-moda
+  cd ivymoda-agent
   ```
 
 ### 📦 Init environment

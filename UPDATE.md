@@ -1,0 +1,27 @@
+- [doc](https://docs.google.com/document/d/1z0VgEIQkmU3rv2gwrQMf0PMnjUCT7a2sak66sSNaORc/edit?usp=sharing)
+
+Plan draft:
+- Clone practice 2 - LangChain advanced - Ivy moda agent
+- List out all stuff needed to update and order by priority
+- Run up previous practice
+    - [highest] Refactor agent with new flow - deadline Feb 14th
+      - [#2][TODO] Handle multi-agents architects - supervisors POC
+        - Supervisor → detect intent → service agent (query, categories)
+        - Supervisor → detect intent → product agent
+    - [TODO] Handle service agent
+        - Keep as it is now.
+        - Parallel retrieve service by categories: faqs, policies, etc.
+        - [Enhance] Clean up retrieval result
+        - [Enhance] Order by relevant
+    - [TODO] Handle product agent
+        - Retrieve product in db (sql tools)
+        - If not found, ask user if they want to use search tool (human-in-the-loop)
+        - Retrieve product with search tool
+    - [low] Add new features
+        - Cart Agent (add, remove, update product in cart)
+        - Order Agent (place an order, tracking order status)
+        - Payment Agent (pay the order with 3-rd party)
+        - Account Agent (update profile, payment methods, address)
+    - Enhance product
+        - [low] Scrap ivymoda website and build db automatically (replace current manually data)
+        - [low] Switch to vietnamese for product
