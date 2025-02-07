@@ -1,0 +1,578 @@
+[
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "What categories of clothing do you offer?"
+      },
+      {
+        "role": "assistant",
+        "content": "We have a stylish variety for you! 👗 Here are our categories:\n- Shirts\n- T-Shirts\n- Sweaters\n- Coats\n- Jackets\n- Pants\n- Shorts\n- Dresses\n\nLet us know if you need further assistance! 😊"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "How can I change the phone number on my account?"
+      },
+      {
+        "role": "assistant",
+        "content": "To update your phone number, please email us at 📧 CSKH@ivy.com.vn. Keep in mind, you can update your number up to 3 times. 😊"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "I forgot my password. How can I reset it?"
+      },
+      {
+        "role": "assistant",
+        "content": "No worries, resetting your password is a breeze! 🔐\n1. Log in to your account on the website.\n2. Click your profile picture > \"My Account\".\n3. Choose \"Change Password\" and follow the prompts.\n\nIf you need more help, feel free to ask! 😊"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Why can't I log into my account?"
+      },
+      {
+        "role": "assistant",
+        "content": "Let's troubleshoot together! 🔍 Please check:\n1. Internet connection stability.\n2. Correct username and password entry.\n\nIf it still doesn't work, contact our support team for assistance! 📞"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "How do I place an order at IVY Moda?"
+      },
+      {
+        "role": "assistant",
+        "content": "Shopping with us is simple and fun! 🛍️\n1. Browse our website/app for products.\n2. Choose your item, select size and color, then \"Add to Cart\".\n3. Review your cart and hit \"Checkout\".\n4. Enter shipping details and select a payment method.\n5. Confirm your order to receive a confirmation notification.\n\nEnjoy your shopping! 😊"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "What are the steps to cancel an order?"
+      },
+      {
+        "role": "assistant",
+        "content": "Need to cancel? Follow these steps 🛑:\n- Log into \"Order Management\".\n- Select the order you wish to cancel.\n- Click \"Cancel Order\".\n\nReach our hotline at 02466623434 if needed! 📞"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "How do I change my delivery address after placing an order?"
+      },
+      {
+        "role": "assistant",
+        "content": "Here's how you can update your address 🚚:\n- For orders via Website/App without an account: Call us at 02466623434 or email 📧 CSKH@ivy.com.vn.\n- With a registered account: Log in and update your address in \"Order Management\".\n\nWe’re here to help! 😊"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "How can I track my order status?"
+      },
+      {
+        "role": "assistant",
+        "content": "Tracking your order is easy! 🕵️‍♂️ Just go to \"Order Management\" in your account for real-time updates. Need more help? Let us know! 😊"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "What is your return policy?"
+      },
+      {
+        "role": "assistant",
+        "content": "Our Returns Policy 📦 is customer-friendly:\n1. Return within 15 days at any IVY Moda store.\n2. Ensure items are unused, with original tags and invoice.\n3. Excluded items: Under 50% discounts, more specific exceptions apply.\n\nContact us for more details! 😊"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Do you have a warranty on products?"
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely, we offer a lifetime free warranty for simple repairs! 🛠️ Please note, some exclusions apply like items labeled IVY Secret. Visit any showroom for repairs. 😊"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "How should I care for my IVY Moda clothes?"
+      },
+      {
+        "role": "assistant",
+        "content": "Keep your fashion fresh! 👗 Here are some tips:\n- Knitwear: Dry flat.\n- Chiffon & Silk: Hand wash.\n- Coarse Fabrics: Machine wash if no decorations.\n\nAlways ensure proper care for long-lasting wear. 😊"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "What's your privacy policy?"
+      },
+      {
+        "role": "assistant",
+        "content": "Your privacy is important to us 🔐! We store and secure your information in accordance with international standards. Rest assured, no third party will track your data. For more details, check our Privacy Policy!"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "How is payment processed at IVY Moda?"
+      },
+      {
+        "role": "assistant",
+        "content": "We offer two secure payment methods 💳:\n1. Cash on Delivery.\n2. Online payment via OnePay using cards.\n\nChoose your preferred method during checkout!"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Can I exchange items?"
+      },
+      {
+        "role": "assistant",
+        "content": "Yes, exchanges are possible! 🔄\n- Within 15 days for items discounted up to 50%.\n- Items should be unused with tags and invoice.\n\nRead the full policy for exclusions or ask us for help! 😊"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "How long does a refund take?"
+      },
+      {
+        "role": "assistant",
+        "content": "Refunds are processed in 10-15 days 🕒, depending on your bank. You'll receive a notification once processed. We’re here if you need any assistance!"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "What are your shipping policies?"
+      },
+      {
+        "role": "assistant",
+        "content": "Our Shipping Policy ensures you receive your order swiftly 📦:\n- Free shipping for orders over 1 million VND.\n- Delivery takes up to 7 days, based on location.\n\nFor more queries, just ask! 😊"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "What if I receive a defective product?"
+      },
+      {
+        "role": "assistant",
+        "content": "Oh no! 😟 If it happens, please document the unboxing with a video and email us at 📧 cskhonline@ivy.com.vn. We will assist with resolving the issue promptly!"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Where can I get my product repaired?"
+      },
+      {
+        "role": "assistant",
+        "content": "Visit any IVY Moda showroom for repairs! 🛠️ Some exclusions exist, like for complex modifications. Feel free to contact our support for guidance. 😊"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "What if my order arrives later than expected?"
+      },
+      {
+        "role": "assistant",
+        "content": "We prioritize your security with robust measures 🛡️:\n- Data encryption.\n- Secure storage standards.\n\nWe continuously update to maintain security. Check our Privacy Policy for more insights! 😊"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "What are your payment options?"
+      },
+      {
+        "role": "assistant",
+        "content": "We've got flexible payment methods for you! 💳✨ Choose from:\n1. Cash on Delivery (COD)\n2. Online Payment through OnePay\n\nSelect your preference at checkout and enjoy shopping! 😊"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "How can I update my email address on my account?"
+      },
+      {
+        "role": "assistant",
+        "content": "Easy peasy! 📧✨ Just email us at CSKH@ivy.com.vn with your new email details, and we'll update it for you!"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Can I change my order details after placing it?"
+      },
+      {
+        "role": "assistant",
+        "content": "🚚💨 Order updates are possible before shipping.\n- Log in to your account, go to \"Order Management\", and edit details.\n\nIf shipped, contact our hotline for assistance!"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Do you offer a warranty on shoes and accessories?"
+      },
+      {
+        "role": "assistant",
+        "content": "For shoes and accessories, warranties apply only to genuine leather items for 6 months! 👞👛 Visit showrooms for warranty services, excluding complex repairs."
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "How do I maintain my denim items?"
+      },
+      {
+        "role": "assistant",
+        "content": "Denim care made simple 👖✨:\n- Avoid machine washing to preserve color.\n- Hand washing recommended.\n- Turn inside out before washing.\n\nKeep your denim looking fresh! 😊"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "How should I store my clothes to maintain their quality?"
+      },
+      {
+        "role": "assistant",
+        "content": "Keep those garments fabulous! 👗✨ Try these tips:\n- Use thick, rounded hangers.\n- Rotate usage to avoid shape loss.\n\nIf you need more guidance, just ask! 😊"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "What should I do if I discover an item is missing from my order?"
+      },
+      {
+        "role": "assistant",
+        "content": "Oh no, let’s sort this out! 📦🚫 Immediately email us at cskhonline@ivy.com.vn with your order details and unboxing video. We'll assist right away!"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "How do I ensure the longevity of my fabric colors?"
+      },
+      {
+        "role": "assistant",
+        "content": "Keep your colors vivid with these tips! 🌈✨\n- Wash separately and promptly.\n- Use mild detergents.\n- Dry in the shade.\n\nAny more questions? I'm here to help! 😊"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "What are the safe zones for your shipping services?"
+      },
+      {
+        "role": "assistant",
+        "content": "We deliver across most territories 🇻🇳✨ via EMS. Note, special zones like islands may have additional considerations. Contact us for specific details!"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Is there a limit to the number of changes I can make to my account info?"
+      },
+      {
+        "role": "assistant",
+        "content": "For phone updates, you can make up to 3 changes. For other info, contact our support for guidance! 😊🔄"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "How do I protect my login credentials?"
+      },
+      {
+        "role": "assistant",
+        "content": "Keep your account safe! 🔒✨\n- Use strong, unique passwords.\n- Avoid sharing details on non-IVY platforms.\n\nNeed more security tips? Reach out! 😊"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Does IVY Moda support purchases with international cards?"
+      },
+      {
+        "role": "assistant",
+        "content": "Yes, indeed! 💳✨ We accept international cards through OnePay. Enjoy global shopping with us! 🌍"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Can I exchange a sale item?"
+      },
+      {
+        "role": "assistant",
+        "content": "Exchanges are for sale items discounted at 50% or less, within 15 days of purchase! 📦✨ Ensure the item is in its original condition with tags."
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "How do I track delivery progress if I don't have an account?"
+      },
+      {
+        "role": "assistant",
+        "content": "For non-account orders, you can track via our delivery hotline ☎️ 0246 662 3434. Alternatively, email us for support."
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "What happens to my account info if I close my account?"
+      },
+      {
+        "role": "assistant",
+        "content": "We securely retain customer information for legal and fraud prevention reasons. 🔐 Rest assured, your data is protected!"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "How is online security maintained during payment?"
+      },
+      {
+        "role": "assistant",
+        "content": "Security comes first! ⚡️ Our payments are safeguarded by OnePay's stringent international standards. Feel confident while you shop! 🛒"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "What are the hours for customer service support?"
+      },
+      {
+        "role": "assistant",
+        "content": "We're here to help! 📞✨ Reach us:\n- Monday to Friday, 8 AM - 5:30 PM.\n\nFor immediate contact, dial our hotline for assistance!"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Is there a fee for extending the warranty service?"
+      },
+      {
+        "role": "assistant",
+        "content": "Our warranty is free for simple repairs! 🛠️✨ Extensions or additional services outside the standard scope may incur charges based on materials."
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "How do you handle privacy breaches?"
+      },
+      {
+        "role": "assistant",
+        "content": "We adhere to strict privacy protocols 🔐. For breaches, immediate investigation and alignment with relevant authorities ensure resolution. Your privacy is our priority!"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Can I rearrange my delivery for a preferred date?"
+      },
+      {
+        "role": "assistant",
+        "content": "While specific scheduling isn't available, contact our support at ☎️ 0246 662 3434 to explore any flexible delivery options. We're happy to assist!"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Do you offer free shipping?"
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely! 🎉 IVY Moda offers free shipping on orders over 1 million VND. 🚚✨ If you have any other questions or need further assistance, just let us know! 💬😊"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "How can I change or update the phone number linked to my IVY Moda account?"
+      },
+      {
+        "role": "assistant",
+        "content": "No worries! To update your phone number, simply send an email to 📧 CSKH@ivy.com.vn requesting the change. Just a heads-up, you can update your phone number up to 3 times for each account. 📱✨"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "How can I maintain the shape of my clothing?"
+      },
+      {
+        "role": "assistant",
+        "content": "To keep your clothes looking fabulous, here are some tips to maintain their shape: \n1. 🔄 Rotate Your Wardrobe: Mix it up by wearing clothes alternately, giving them a chance to breathe. After each wear, hang them in a well-ventilated space to keep them fresh. 🌬️\n2. 👜 Keep It Light: Only carry the essentials in your pockets to avoid any garment distortion. ✨\n3. 🧼 Stay Clean: Gently use a soft brush or lint roller to remove any debris before washing—your clothes will thank you! 🙌\n4. 👔 Suits Deserve the Best: Never throw your suits in the washer. For the best results, take them to a pro cleaner to keep them in pristine condition. 🧑‍🔬\n\nGot more questions? Don't hesitate to ask! 😊💬"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Could you list your policies for me?"
+      },
+      {
+        "role": "assistant",
+        "content": "Of course! 📜 Here are our policies for your reference:\n- Payments Policy\n- Returns Policy\n- Warranty Policy\n- Shipping Policy\n- Privacy Policy\n\nLet us know if you need more details on any of these! 😊"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "How do I prevent my clothes from losing shape?"
+      },
+      {
+        "role": "assistant",
+        "content": "Great question! Here are a few tips to maintain shape: 👚✨\n1. Rotate usage frequently.\n2. Avoid overstuffing pockets.\n3. Hang clothes on sturdy hangers.\n\nKeep your wardrobe looking fresh! 😊"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Can I request a specific delivery partner?"
+      },
+      {
+        "role": "assistant",
+        "content": "We use EMS for all deliveries 🚚 to ensure reliability. If you have specific needs, please contact our support for assistance!"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "What should I do if I receive an incorrect item?"
+      },
+      {
+        "role": "assistant",
+        "content": "We're sorry about that mix-up! 📦🔄 Please contact us at CSKH@ivy.com.vn with your order details and pictures. We'll resolve it quickly!"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Is there a way to expedite my delivery?"
+      },
+      {
+        "role": "assistant",
+        "content": "Currently, standard shipping is within 7 days 🚀. Contact us at 0246 662 3434 for any faster delivery options. We’ll do our best to help!"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "How can I ensure my order is secure during shipping?"
+      },
+      {
+        "role": "assistant",
+        "content": "Your order's security is our top priority! 🔒✨ Ensure the package is intact upon arrival, and in case of any issues, record the unboxing and contact us immediately at cskhonline@ivy.com.vn. We're here to help!"
+      }
+    ]
+  }
+]

@@ -1,0 +1,1124 @@
+[
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Do you offer free shipping?"
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "call_id",
+            "type": "function",
+            "function": {
+              "name": "lookup_documents",
+              "arguments": "{\"document_request\": {\"query\": \"Do you offer free shipping?\", \"service_categories\": [\"faqs\"]}}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "call_6FPsAfCZR4b9X2ky7lyFqAg4",
+        "content": "[Document(metadata={'service_category': 'faqs', 'source': 'faqs.txt'}, page_content='IV. DELIVERY\\n\\nQ: How can I track the processing status of my order at IVY Moda?\\nA: You can check your order status by visiting the \"Order Management\" section.\\n\\nQ: How can I receive my order faster?\\nA: Delivery typically takes 3-5 business days.\\n\\nQ: Do you offer free shipping?\\nA: Free shipping is available on orders over 1 million VND.\\n\\nV. RETURN AND WARRANTY')]"
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely! 🎉 IVY Moda offers free shipping on orders over 1 million VND. 🚚✨ If you have any other questions or need further assistance, just let us know! 💬😊"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "save_memory",
+          "description": "Use this tool to save memories like user information to storage",
+          "parameters": {
+            "properties": {
+              "memory": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "memory"
+            ],
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "lookup_documents",
+          "description": "Retrieve shop documents for queries about store services like policies, FAQs, or categories. Use for intent `service`.\n\nCategories:\n- faqs: General queries like \"How to cancel an order.\"\n- policies: Detailed policy inquiries like \"What is your refund policy?\"\n\nExample:\n- Query: \"What are your policies?\" → Category: [policies]\n\nUse only when `intent = service`.",
+          "parameters": {
+            "properties": {
+              "document_request": {
+                "properties": {
+                  "query": {
+                    "type": "string"
+                  },
+                  "service_categories": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "maxItems": 2,
+                    "minItems": 0,
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "query",
+                  "service_categories"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "document_request"
+            ],
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "sql_db_schema",
+          "description": "Get the schema and sample rows for the specified SQL tables.Use after verifying table names.Prerequisite: Call sql_db_list_tables first if tables are unknown.",
+          "parameters": {
+            "properties": {
+              "table_names": {
+                "description": "A comma-separated list of the table names for which to return the schema. Example input: 'table1, table2, table3'",
+                "type": "string"
+              }
+            },
+            "required": [
+              "table_names"
+            ],
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "sql_db_list_tables",
+          "description": "Get database table names\nInput is an empty string, output is a comma-separated list of tables in the database. Call this only if table names are unknown.\n",
+          "parameters": {
+            "properties": {
+              "tool_input": {
+                "default": "",
+                "description": "An empty string",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "check_and_execute_query_tool",
+          "description": "Validate and execute SQL queries.\n\nRequirements:\n- Prior calls to sql_db_list_tables and sql_db_schema.\n- Ensure SQL syntax correctness.\n\nExample query: \"SELECT * FROM Product WHERE name LIKE '%cotton%';\"\n\nReturns: Query result or error for retry.",
+          "parameters": {
+            "properties": {
+              "query": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "query"
+            ],
+            "type": "object"
+          }
+        }
+      }
+    ],
+    "parallel_tool_calls": false
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Give me list categories."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "call_id",
+            "type": "function",
+            "function": {
+              "name": "lookup_documents",
+              "arguments": "{\"document_request\": {\"query\": \"Give me list categories.\", \"service_categories\": [\"faqs\"]}}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "call_6FPsAfCZR4b9X2ky7lyFqAg5",
+        "content": "[Document(metadata={'service_category': 'faqs', 'source': 'faqs.txt'}, page_content='I. GENERAL INFORMATION\nQ: What are categories?\nA: Here are categories: \"Shirts\", \"T-Shirts\", \"Sweaters\", \"Coats\", \"Jackets\", \"Pants\", \"Shorts\", \"Dresses\"\n\nII. ACCOUNT\n\nQ: How can I change or update the phone number linked to my IVY Moda account?\nA: Please send an email to CSKH@ivy.com.vn to request a phone number change. Each account is allowed a maximum of 3 phone number changes.')]"
+      },
+      {
+        "role": "assistant",
+        "content": "We have a stylish variety for you! 👗 Here are our categories:\n- Shirts\n- T-Shirts\n- Sweaters\n- Coats\n- Jackets\n- Pants\n- Shorts\n- Dresses\nLet us know if you need further assistance! 😊"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "save_memory",
+          "description": "Use this tool to save memories like user information to storage",
+          "parameters": {
+            "properties": {
+              "memory": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "memory"
+            ],
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "lookup_documents",
+          "description": "Retrieve shop documents for queries about store services like policies, FAQs, or categories. Use for intent `service`.\n\nCategories:\n- faqs: General queries like \"How to cancel an order.\"\n- policies: Detailed policy inquiries like \"What is your refund policy?\"\n\nExample:\n- Query: \"What are your policies?\" → Category: [policies]\n\nUse only when `intent = service`.",
+          "parameters": {
+            "properties": {
+              "document_request": {
+                "properties": {
+                  "query": {
+                    "type": "string"
+                  },
+                  "service_categories": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "maxItems": 2,
+                    "minItems": 0,
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "query",
+                  "service_categories"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "document_request"
+            ],
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "sql_db_schema",
+          "description": "Get the schema and sample rows for the specified SQL tables.Use after verifying table names.Prerequisite: Call sql_db_list_tables first if tables are unknown.",
+          "parameters": {
+            "properties": {
+              "table_names": {
+                "description": "A comma-separated list of the table names for which to return the schema. Example input: 'table1, table2, table3'",
+                "type": "string"
+              }
+            },
+            "required": [
+              "table_names"
+            ],
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "sql_db_list_tables",
+          "description": "Get database table names\nInput is an empty string, output is a comma-separated list of tables in the database. Call this only if table names are unknown.\n",
+          "parameters": {
+            "properties": {
+              "tool_input": {
+                "default": "",
+                "description": "An empty string",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "check_and_execute_query_tool",
+          "description": "Validate and execute SQL queries.\n\nRequirements:\n- Prior calls to sql_db_list_tables and sql_db_schema.\n- Ensure SQL syntax correctness.\n\nExample query: \"SELECT * FROM Product WHERE name LIKE '%cotton%';\"\n\nReturns: Query result or error for retry.",
+          "parameters": {
+            "properties": {
+              "query": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "query"
+            ],
+            "type": "object"
+          }
+        }
+      }
+    ],
+    "parallel_tool_calls": false
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "What is your refund policy?"
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "call_id",
+            "type": "function",
+            "function": {
+              "name": "lookup_documents",
+              "arguments": "{\"document_request\": {\"query\": \"What is your refund policy?\", \"service_categories\": [\"policies\",\"faqs\"]}}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "call_6FPsAfCZR4b9X2ky7lyFqAg6",
+        "content": "[Document(metadata={'key': 'return_policy', 'service_category': 'policies', 'source': 'policies.yaml'}, page_content='- Returns are only allowed once according to the policy.\\n\\n    - The return value of the product is calculated based on the unit price on the\\n    invoice.\\n\\n    - IVY moda only issues \"Deposit Receipts\" to refund the excess after returns and\\n    the value of returned items; no cash refunds are allowed.\\n\\n    - If the error is due to the manufacturer, IVY moda will bear the full cost of\\n    shipping for the return and exchange.\\n\\n\\n    4. EXCLUDED RETURN CASES')],[Document(metadata={'service_category': 'faqs', 'source': 'faqs.txt'}, page_content='Q: How long does it take to receive a refund?\\nA: IVY Moda will issue a receipt immediately for cases such as:\\n- Returns where no suitable exchange product is available.\\n- Overpayment due to duplicate charges (e.g., both online and on delivery).\\n- Products with manufacturing defects.\\nRefunds are processed within 10-15 days after receiving the request.')]"
+      },
+      {
+        "role": "assistant",
+        "content": "✨ Here’s our Refund Policy at IVY Moda Fashion Store:\n- 🔄 Returns: Each order is allowed one return under our policy.\n- 💰 Refund Calculation: The refund amount is based on the unit price stated on the invoice.\n- 🧾 Deposit Receipts: Refunds are issued as Deposit Receipts only—cash refunds are not available.\n- 🚛 Manufacturer Errors: If the issue is due to a manufacturer error, IVY Moda will cover the full shipping cost for returns or exchanges.\n\n**Additional Information:**\n- ⏳ Refund Timing: Refunds are processed within 10–15 days after receiving the request for the following cases:\n- 🛍️ Returns where no suitable exchange product is available.\n- 💳 Overpayments (e.g., duplicate charges for online and delivery).\n- 🛠️ Products with manufacturing defects.\n\n💡 Need further assistance? Don’t hesitate to ask—we’re here to help! 😊"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "save_memory",
+          "description": "Use this tool to save memories like user information to storage",
+          "parameters": {
+            "properties": {
+              "memory": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "memory"
+            ],
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "lookup_documents",
+          "description": "Retrieve shop documents for queries about store services like policies, FAQs, or categories. Use for intent `service`.\n\nCategories:\n- faqs: General queries like \"How to cancel an order.\"\n- policies: Detailed policy inquiries like \"What is your refund policy?\"\n\nExample:\n- Query: \"What are your policies?\" → Category: [policies]\n\nUse only when `intent = service`.",
+          "parameters": {
+            "properties": {
+              "document_request": {
+                "properties": {
+                  "query": {
+                    "type": "string"
+                  },
+                  "service_categories": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "maxItems": 2,
+                    "minItems": 0,
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "query",
+                  "service_categories"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "document_request"
+            ],
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "sql_db_schema",
+          "description": "Get the schema and sample rows for the specified SQL tables.Use after verifying table names.Prerequisite: Call sql_db_list_tables first if tables are unknown.",
+          "parameters": {
+            "properties": {
+              "table_names": {
+                "description": "A comma-separated list of the table names for which to return the schema. Example input: 'table1, table2, table3'",
+                "type": "string"
+              }
+            },
+            "required": [
+              "table_names"
+            ],
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "sql_db_list_tables",
+          "description": "Get database table names\nInput is an empty string, output is a comma-separated list of tables in the database. Call this only if table names are unknown.\n",
+          "parameters": {
+            "properties": {
+              "tool_input": {
+                "default": "",
+                "description": "An empty string",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "check_and_execute_query_tool",
+          "description": "Validate and execute SQL queries.\n\nRequirements:\n- Prior calls to sql_db_list_tables and sql_db_schema.\n- Ensure SQL syntax correctness.\n\nExample query: \"SELECT * FROM Product WHERE name LIKE '%cotton%';\"\n\nReturns: Query result or error for retry.",
+          "parameters": {
+            "properties": {
+              "query": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "query"
+            ],
+            "type": "object"
+          }
+        }
+      }
+    ],
+    "parallel_tool_calls": false
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Can I refund my order?"
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "call_id",
+            "type": "function",
+            "function": {
+              "name": "lookup_documents",
+              "arguments": "{\"document_request\": {\"query\": \"Can I refund my order?\", \"service_categories\": [\"faqs\", \"policies\"]}}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "call_wrBjiq5sUU3ysE0qoPQev2aw",
+        "content": "[Document(metadata={'key': 'return_policy', 'service_category': 'policies', 'source': 'policies.yaml'}, page_content='- Returns are only allowed once according to the policy.\\n\\n    - The return value of the product is calculated based on the unit price on the\\n    invoice.\\n\\n    - IVY moda only issues \"Deposit Receipts\" to refund the excess after returns and\\n    the value of returned items; no cash refunds are allowed.\\n\\n    - If the error is due to the manufacturer, IVY moda will bear the full cost of\\n    shipping for the return and exchange.\\n\\n\\n    4. EXCLUDED RETURN CASES'), Document(metadata={'service_category': 'faqs', 'source': 'faqs.txt'}, page_content='Q: How can I cancel my order?\\nA: Log in to the \"Order Management\" section, select the order you want to cancel, and click \"Cancel Order.\"\\n- For prepaid orders, please contact the IVY Moda hotline at 02466623434 (extension 3) for support between 8:00 AM - 5:30 PM, Monday to Friday.\\n- For orders already in transit, you cannot cancel via the website. Instead, refuse the delivery when it arrives.\\n\\nIII. ORDER & PAYMENT')]"
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely! Here’s the refund policy for IVY Moda Fashion Store:\n\n**🕒 Return Period**\n- Returns are accepted within 15 days from the date you receive the items.\n**📍 Return Locations**\n- You can return items at any IVY Moda store or through our Online Warehouse system.\n**📦 Return Conditions**\n- 🏷️ Items must still have the original tags and barcodes.\n- ❌ Items must be unused and include the original invoice.\n- 👕 This applies to products made of cotton, wool, cotton-wool blends, and jeans.\n**💸 Refund Process**\n- 🔄 One-Time Return: Returns are allowed only once per policy.\n- 💰 Refund Value: Calculated based on the unit price on the invoice.\n- 🧾 Deposit Receipts Only: Refunds are issued as Deposit Receipts—cash refunds are not available.\n- 🚛 Manufacturer Errors: If the issue is due to the manufacturer, IVY Moda will cover the full shipping cost for the return and exchange.\n\n💡 Need help or have more questions? Feel free to ask—we’re always here for you! 😊"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "save_memory",
+          "description": "Use this tool to save memories like user information to storage",
+          "parameters": {
+            "properties": {
+              "memory": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "memory"
+            ],
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "lookup_documents",
+          "description": "Retrieve shop documents for queries about store services like policies, FAQs, or categories. Use for intent `service`.\n\nCategories:\n- faqs: General queries like \"How to cancel an order.\"\n- policies: Detailed policy inquiries like \"What is your refund policy?\"\n\nExample:\n- Query: \"What are your policies?\" → Category: [policies]\n\nUse only when `intent = service`.",
+          "parameters": {
+            "properties": {
+              "document_request": {
+                "properties": {
+                  "query": {
+                    "type": "string"
+                  },
+                  "service_categories": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "maxItems": 2,
+                    "minItems": 0,
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "query",
+                  "service_categories"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "document_request"
+            ],
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "sql_db_schema",
+          "description": "Get the schema and sample rows for the specified SQL tables.Use after verifying table names.Prerequisite: Call sql_db_list_tables first if tables are unknown.",
+          "parameters": {
+            "properties": {
+              "table_names": {
+                "description": "A comma-separated list of the table names for which to return the schema. Example input: 'table1, table2, table3'",
+                "type": "string"
+              }
+            },
+            "required": [
+              "table_names"
+            ],
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "sql_db_list_tables",
+          "description": "Get database table names\nInput is an empty string, output is a comma-separated list of tables in the database. Call this only if table names are unknown.\n",
+          "parameters": {
+            "properties": {
+              "tool_input": {
+                "default": "",
+                "description": "An empty string",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "check_and_execute_query_tool",
+          "description": "Validate and execute SQL queries.\n\nRequirements:\n- Prior calls to sql_db_list_tables and sql_db_schema.\n- Ensure SQL syntax correctness.\n\nExample query: \"SELECT * FROM Product WHERE name LIKE '%cotton%';\"\n\nReturns: Query result or error for retry.",
+          "parameters": {
+            "properties": {
+              "query": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "query"
+            ],
+            "type": "object"
+          }
+        }
+      }
+    ],
+    "parallel_tool_calls": false
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Give me product \"Serge Checkered Wide-Leg Pants\""
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "call_id",
+            "type": "function",
+            "function": {
+              "name": "sql_db_list_tables",
+              "arguments": "{}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "call_ZmVmFect6MSzUuN23FJDXJDy",
+        "content": "Category, Product"
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "call_id",
+            "type": "function",
+            "function": {
+              "name": "sql_db_schema",
+              "arguments": "{}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "call_3ByqFym9zeE9xJYoY8ksiudw",
+        "content": "\nCREATE TABLE \"Product\" (\n\tid INTEGER NOT NULL, \n\tname VARCHAR NOT NULL, \n\tdescription VARCHAR, \n\tprice FLOAT NOT NULL, \n\tout_of_stock BOOLEAN, \n\tcategory_id INTEGER NOT NULL, \n\timages VARCHAR, \n\turl VARCHAR, \n\tPRIMARY KEY (id), \n\tFOREIGN KEY(category_id) REFERENCES \"Category\" (id)\n)"
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "call_id",
+            "type": "function",
+            "function": {
+              "name": "check_and_execute_query_tool",
+              "arguments": "{\"query\":\"SELECT*FROMProductWHEREnameLIKE'%SergeCheckeredWide-LegPants%';\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "call_fkGMBq42S1sUS2LW2j395rxI",
+        "content": "[(13, 'Serge Checkered Wide-Leg Pants', 'These modern trousers blend youthful fashion style with the sophistication of the office environment. The high-waisted design combined with wide legs enhances the figure while offering comfort to the wearer. The Serge fabric, made from Poly, Rayon, and Spandex fibers, is soft, breathable,...', 56.0, 0, 3, 'https://pubcdn.ivymoda.com/files/product/thumab/1400/2024/10/25/1abccfaf1be0591ef24d7218008e34f2.webp', 'https://ivymoda.com/sanpham/quan-ke-serge-ong-suong-ms-22m8878-40850')]"
+      },
+      {
+        "role": "assistant",
+        "content": "Here's the elegant **Serge Checkered Wide-Leg Pants** you're interested in:\n- 💲 Price: $56.00\n- ✨ Description: These modern trousers blend youthful fashion style with the sophistication of the office environment. The high-waisted design combined with wide legs enhances the figure while offering comfort to the wearer. The Serge fabric, made from Poly, Rayon, and Spandex fibers, is soft and breathable.\n- ✅ Availability: In stock\n- 🖼️ ![Serge Checkered Wide-Leg Pants](https://pubcdn.ivymoda.com/files/product/thumab/1400/2024/10/25/1abccfaf1be0591ef24d7218008e34f2.webp)\n- 🔗 [👉 Shop Now](https://ivymoda.com/sanpham/quan-ke-serge-ong-suong-ms-22m8878-40850)\nElevate your outerwear collection! 🌧️🧥"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "save_memory",
+          "description": "Use this tool to save memories like user information to storage",
+          "parameters": {
+            "properties": {
+              "memory": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "memory"
+            ],
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "lookup_documents",
+          "description": "Retrieve shop documents for queries about store services like policies, FAQs, or categories. Use for intent `service`.\n\nCategories:\n- faqs: General queries like \"How to cancel an order.\"\n- policies: Detailed policy inquiries like \"What is your refund policy?\"\n\nExample:\n- Query: \"What are your policies?\" → Category: [policies]\n\nUse only when `intent = service`.",
+          "parameters": {
+            "properties": {
+              "document_request": {
+                "properties": {
+                  "query": {
+                    "type": "string"
+                  },
+                  "service_categories": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "maxItems": 2,
+                    "minItems": 0,
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "query",
+                  "service_categories"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "document_request"
+            ],
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "sql_db_schema",
+          "description": "Get the schema and sample rows for the specified SQL tables.Use after verifying table names.Prerequisite: Call sql_db_list_tables first if tables are unknown.",
+          "parameters": {
+            "properties": {
+              "table_names": {
+                "description": "A comma-separated list of the table names for which to return the schema. Example input: 'table1, table2, table3'",
+                "type": "string"
+              }
+            },
+            "required": [
+              "table_names"
+            ],
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "sql_db_list_tables",
+          "description": "Get database table names\nInput is an empty string, output is a comma-separated list of tables in the database. Call this only if table names are unknown.\n",
+          "parameters": {
+            "properties": {
+              "tool_input": {
+                "default": "",
+                "description": "An empty string",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "check_and_execute_query_tool",
+          "description": "Validate and execute SQL queries.\n\nRequirements:\n- Prior calls to sql_db_list_tables and sql_db_schema.\n- Ensure SQL syntax correctness.\n\nExample query: \"SELECT * FROM Product WHERE name LIKE '%cotton%';\"\n\nReturns: Query result or error for retry.",
+          "parameters": {
+            "properties": {
+              "query": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "query"
+            ],
+            "type": "object"
+          }
+        }
+      }
+    ],
+    "parallel_tool_calls": false
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Do you have \"Vintage Oversized T Shirt\"?"
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "call_id",
+            "type": "function",
+            "function": {
+              "name": "sql_db_list_tables",
+              "arguments": "{}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "call_y3gD1kiIAcuDvKky3pPOoRG3",
+        "content": "Category, Product"
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "call_id",
+            "type": "function",
+            "function": {
+              "name": "sql_db_schema",
+              "arguments": "{}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "call_y3gD1kiIAcuDvKky3pPOoRGV",
+        "content": "\nCREATE TABLE \"Product\" (\n\tid INTEGER NOT NULL, \n\tname VARCHAR NOT NULL, \n\tdescription VARCHAR, \n\tprice FLOAT NOT NULL, \n\tout_of_stock BOOLEAN, \n\tcategory_id INTEGER NOT NULL, \n\timages VARCHAR, \n\turl VARCHAR, \n\tPRIMARY KEY (id), \n\tFOREIGN KEY(category_id) REFERENCES \"Category\" (id)\n)"
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "call_id",
+            "type": "function",
+            "function": {
+              "name": "check_and_execute_query_tool",
+              "arguments": "{\"query\":\"SELECT * FROM Product WHERE name LIKE '%Vintage Oversized T Shirt%';\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "call_RSx7DVV7QGaguqeVh9gNnleQ",
+        "content": ""
+      },
+      {
+        "role": "assistant",
+        "content": "❄️ Thank you for reaching out! \"Vintage Oversized T Shirt\" is not available in our collection at the moment. Would you like me to help you search for it using Google Shopping? 🛍️"
+      },
+      {
+        "role": "user",
+        "content": "Yes, please."
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "call_id",
+            "type": "function",
+            "function": {
+              "name": "search_google_shopping",
+              "arguments": "{\"query\":\"Vintage Oversized T Shirt\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "call_RSx7DVV7QGaguqeVh9gNnleR",
+        "content": "{\"price\":\"$45\",\"description\":\"\",\"source\":\"Etsy\",\"images\":[\"https://serpapi.com/searches/678f61d6a6ffaeb6b8faf451/images/dc8c5df39751ea1e0dda7f799fc444b8ed6b54eba04f7462a88ecf9e2685c199.webp\"],\"url\":\"https://www.google.com/shopping/product/2752350636036455840?gl=us\"}"
+      },
+      {
+        "role": "assistant",
+        "content": "✅ Here's the information I've found via Google Shopping::\n- **Price**: $45.00\n- **Source**: Etsy\n- **Image**: ![Vintage Oversized T Shirt](https://serpapi.com/searches/678f61d6a6ffaeb6b8faf451/images/dc8c5df39751ea1e0dda7f799fc444b8ed6b54eba04f7462a88ecf9e2685c199.webp)\n- **[View Product](https://www.google.com/shopping/product/2752350636036455840?gl=us)**"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "save_memory",
+          "description": "Use this tool to save memories like user information to storage",
+          "parameters": {
+            "properties": {
+              "memory": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "memory"
+            ],
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "lookup_documents",
+          "description": "Retrieve shop documents for queries about store services like policies, FAQs, or categories. Use for intent `service`.\n\nCategories:\n- faqs: General queries like \"How to cancel an order.\"\n- policies: Detailed policy inquiries like \"What is your refund policy?\"\n\nExample:\n- Query: \"What are your policies?\" → Category: [policies]\n\nUse only when `intent = service`.",
+          "parameters": {
+            "properties": {
+              "document_request": {
+                "properties": {
+                  "query": {
+                    "type": "string"
+                  },
+                  "service_categories": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "maxItems": 2,
+                    "minItems": 0,
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "query",
+                  "service_categories"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "document_request"
+            ],
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "sql_db_schema",
+          "description": "Get the schema and sample rows for the specified SQL tables.Use after verifying table names.Prerequisite: Call sql_db_list_tables first if tables are unknown.",
+          "parameters": {
+            "properties": {
+              "table_names": {
+                "description": "A comma-separated list of the table names for which to return the schema. Example input: 'table1, table2, table3'",
+                "type": "string"
+              }
+            },
+            "required": [
+              "table_names"
+            ],
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "sql_db_list_tables",
+          "description": "Get database table names\nInput is an empty string, output is a comma-separated list of tables in the database. Call this only if table names are unknown.\n",
+          "parameters": {
+            "properties": {
+              "tool_input": {
+                "default": "",
+                "description": "An empty string",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "check_and_execute_query_tool",
+          "description": "Validate and execute SQL queries.\n\nRequirements:\n- Prior calls to sql_db_list_tables and sql_db_schema.\n- Ensure SQL syntax correctness.\n\nExample query: \"SELECT * FROM Product WHERE name LIKE '%cotton%';\"\n\nReturns: Query result or error for retry.",
+          "parameters": {
+            "properties": {
+              "query": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "query"
+            ],
+            "type": "object"
+          }
+        }
+      }
+    ],
+    "parallel_tool_calls": false
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Do you have \"Amour Silk Shirt\"?"
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "call_id",
+            "type": "function",
+            "function": {
+              "name": "sql_db_list_tables",
+              "arguments": "{}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "call_y3gD1kiIAcuDvKky3pPOoRGP",
+        "content": "Category, Product"
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "call_id",
+            "type": "function",
+            "function": {
+              "name": "sql_db_schema",
+              "arguments": "{}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "call_y3gD1kiIAcuDvKky3pPOoRG4",
+        "content": "\nCREATE TABLE \"Product\" (\n\tid INTEGER NOT NULL, \n\tname VARCHAR NOT NULL, \n\tdescription VARCHAR, \n\tprice FLOAT NOT NULL, \n\tout_of_stock BOOLEAN, \n\tcategory_id INTEGER NOT NULL, \n\timages VARCHAR, \n\turl VARCHAR, \n\tPRIMARY KEY (id), \n\tFOREIGN KEY(category_id) REFERENCES \"Category\" (id)\n)"
+      },
+      {
+        "role": "assistant",
+        "tool_calls": [
+          {
+            "id": "call_id",
+            "type": "function",
+            "function": {
+              "name": "check_and_execute_query_tool",
+              "arguments": "{\"query\":\"SELECT * FROM Product WHERE name LIKE '%Amour Silk Shirt%';\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "call_RSx7DVV7QGaguqeVh9gNnleY",
+        "content": ""
+      },
+      {
+        "role": "assistant",
+        "content": "❄️ Thank you for reaching out! \"Amour Silk Shirt\" is not available in our collection at the moment. Would you like me to help you search for it using Google Shopping? 🛍️"
+      },
+      {
+        "role": "user",
+        "content": "No, I'll pass on that."
+      },
+      {
+        "role": "assistant",
+        "content": "Understood! If there's anything else you need or have any questions, just let us know. We're happy to assist you! 🖤 "
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "save_memory",
+          "description": "Use this tool to save memories like user information to storage",
+          "parameters": {
+            "properties": {
+              "memory": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "memory"
+            ],
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "lookup_documents",
+          "description": "Retrieve shop documents for queries about store services like policies, FAQs, or categories. Use for intent `service`.\n\nCategories:\n- faqs: General queries like \"How to cancel an order.\"\n- policies: Detailed policy inquiries like \"What is your refund policy?\"\n\nExample:\n- Query: \"What are your policies?\" → Category: [policies]\n\nUse only when `intent = service`.",
+          "parameters": {
+            "properties": {
+              "document_request": {
+                "properties": {
+                  "query": {
+                    "type": "string"
+                  },
+                  "service_categories": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "maxItems": 2,
+                    "minItems": 0,
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "query",
+                  "service_categories"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "document_request"
+            ],
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "sql_db_schema",
+          "description": "Get the schema and sample rows for the specified SQL tables.Use after verifying table names.Prerequisite: Call sql_db_list_tables first if tables are unknown.",
+          "parameters": {
+            "properties": {
+              "table_names": {
+                "description": "A comma-separated list of the table names for which to return the schema. Example input: 'table1, table2, table3'",
+                "type": "string"
+              }
+            },
+            "required": [
+              "table_names"
+            ],
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "sql_db_list_tables",
+          "description": "Get database table names\nInput is an empty string, output is a comma-separated list of tables in the database. Call this only if table names are unknown.\n",
+          "parameters": {
+            "properties": {
+              "tool_input": {
+                "default": "",
+                "description": "An empty string",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "check_and_execute_query_tool",
+          "description": "Validate and execute SQL queries.\n\nRequirements:\n- Prior calls to sql_db_list_tables and sql_db_schema.\n- Ensure SQL syntax correctness.\n\nExample query: \"SELECT * FROM Product WHERE name LIKE '%cotton%';\"\n\nReturns: Query result or error for retry.",
+          "parameters": {
+            "properties": {
+              "query": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "query"
+            ],
+            "type": "object"
+          }
+        }
+      }
+    ],
+    "parallel_tool_calls": false
+  }
+]

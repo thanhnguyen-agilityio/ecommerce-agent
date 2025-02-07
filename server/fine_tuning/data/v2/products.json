@@ -1,0 +1,362 @@
+[
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "I'm looking for the Estelle Puffer Jacket"
+      },
+      {
+        "role": "assistant",
+        "content": "Here's the cozy and stylish **Estelle Puffer Jacket** just for you:\n- 💲 Price: $89.00\n- ✨ Description: Stay warm while staying trendy with the Estelle Puffer Jacket, designed with plush insulation and a sleek, modern fit.\n- ✅ Availability: In stock\n- 🖼️ ![](https://pubcdn.ivymoda.com/files/product/thumab/1400/2024/11/05/sample1.webp)\n- 🔗 [👉 Shop Now](https://ivymoda.com/sanpham/estelle-puffer-jacket-49215)\n\nMake this winter a fashionable one! ❄️🧥"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Do you have the Camden Cargo Pants?"
+      },
+      {
+        "role": "assistant",
+        "content": "Here you go! The **Camden Cargo Pants** are available right now:\n- 💲 Price: $55.00\n- ✨ Description: Versatile and durable, these pants are perfect for casual outings and adventures. Equipped with multiple pockets for practicality.\n- ✅ Availability: In stock\n- 🖼️ ![](https://pubcdn.ivymoda.com/files/product/thumab/1400/2024/11/05/sample2.webp)\n- 🔗 [👉 Shop Now](https://ivymoda.com/sanpham/camden-cargo-pants-51102)\n\nGet ready for your next adventure! 🚶‍♂️🕶️"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Can you find the Harper Oversized Sweater for me?"
+      },
+      {
+        "role": "assistant",
+        "content": "Of course! Here's the comfy **Harper Oversized Sweater**:\n- 💲 Price: $67.00\n- ✨ Description: Indulge in warmth with this oversized staple, featuring soft knit fabric and a trendy, relaxed fit that pairs effortlessly with any outfit.\n- ✅ Availability: In stock\n- 🖼️ ![](https://pubcdn.ivymoda.com/files/product/thumab/1400/2024/11/05/sample3.webp)\n- 🔗 [👉 Shop Now](https://ivymoda.com/sanpham/harper-oversized-sweater-51547)\n\nPerfect for those cozy days in and out! 🧶🍂"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "I need details on the Olivia Trench Coat."
+      },
+      {
+        "role": "assistant",
+        "content": "Here's the elegant **Olivia Trench Coat** you're interested in:\n- 💲 Price: $120.00\n- ✨ Description: A timeless classic with a modern twist, featuring tailored fit and water-resistant fabric to keep you stylish and dry.\n- ✅ Availability: In stock\n- 🖼️ ![](https://pubcdn.ivymoda.com/files/product/thumab/1400/2024/11/05/sample4.webp)\n- 🔗 [👉 Shop Now](https://ivymoda.com/sanpham/olivia-trench-coat-45029)\n\nElevate your outerwear collection! 🌧️🧥"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Show me the Florence High Waist Shorts."
+      },
+      {
+        "role": "assistant",
+        "content": "Take a look at the chic **Florence High Waist Shorts**:\n- 💲 Price: $42.00\n- ✨ Description: Chic and versatile, these shorts provide the perfect balance of comfort and style, with a flattering high waist and soft fabric.\n- ✅ Availability: In stock\n- 🖼️ ![](https://pubcdn.ivymoda.com/files/product/thumab/1400/2024/11/05/sample5.webp)\n- 🔗 [👉 Shop Now](https://ivymoda.com/sanpham/florence-high-waist-shorts-40157)\n\nReady to be your summer staple! 🌞👖"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "What's the price for the Jasper Checked Cotton Shirt?"
+      },
+      {
+        "role": "assistant",
+        "content": "The Jasper Checked Cotton Shirt is priced at a crisp $45.00. Ideal for adding a bit of pattern to your wardrobe. 👔✨"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Is the Nova Vintage Graphic T-Shirt currently in stock?"
+      },
+      {
+        "role": "assistant",
+        "content": "Yes, the Nova Vintage Graphic T-Shirt is available and waiting to jazz up your look with its retro vibes! 🎨👕"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "How much is the Sapphire Knit Cardigan?"
+      },
+      {
+        "role": "assistant",
+        "content": "The Sapphire Knit Cardigan is yours for $87.00, offering a perfect blend of warmth and elegance for your everyday style. 🧥🌟"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Do you have the Lila Wool Blend Coat available?"
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely, the Lila Wool Blend Coat is in stock! Ready to accompany you through all seasons with timeless sophistication. 🌦️🧥"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Could you tell me the price of the Phoenix Leather Jacket?"
+      },
+      {
+        "role": "assistant",
+        "content": "The ever-stylish Phoenix Leather Jacket is priced at $150.00, perfect for making a statement. 🕶️🔥"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Are the Theo Slim Fit Chinos available?"
+      },
+      {
+        "role": "assistant",
+        "content": "Yes, the Theo Slim Fit Chinos are back in stock! Slim-fitting perfection for every occasion. 👖👍"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "What's the cost of the Avery Tailored Shorts?"
+      },
+      {
+        "role": "assistant",
+        "content": "The Avery Tailored Shorts are available for $38.00 – versatile enough for both casual and semi-formal occasions. 🎯👖"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Is the Elise Floral Maxi Dress in stock?"
+      },
+      {
+        "role": "assistant",
+        "content": "Indeed, the Elise Floral Maxi Dress is currently available for your choosing. It’ll make a blooming addition to your wardrobe! 🌺👗"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Can you tell me the price of the Orion Running Sneakers?"
+      },
+      {
+        "role": "assistant",
+        "content": "The Orion Running Sneakers can be yours for $96.00, designed to pair form and function seamlessly. 🏃‍♂️👟"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Is the Aurora Leather Satchel available?"
+      },
+      {
+        "role": "assistant",
+        "content": "Yes, the Aurora Leather Satchel is in stock. Thank you for choosing to enhance your style with this chic accessory! 👜✨"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Can you recommend some shirts from your collection?"
+      },
+      {
+        "role": "assistant",
+        "content": "Absolutely! Here are some stylish picks from our **Shirt Collection**:\n1. **Oliver Button-Up Linen Shirt**  \n   - 💲 Price: $120.00  \n   - ✨ Description: Light, breathable fabric perfect for summer days 🌞  \n   - ✅ Availability: In stock  \n   - 🖼️ ![](https://pubcdn.ivymoda.com/files/product/thumab/1400/2024/11/05/sample4.webp)  \n   - 🔗 [👉 Shop Now](https://ivymoda.com/sanpham/olivia-trench-coat-45029)  \n2. **Madison Plaid Flannel Shirt**  \n   - 💲 Price: $50.00  \n   - ✨ Description: Cozy and stylish option for cooler evenings 🌙  \n   - ✅ Availability: In stock  \n   - 🖼️ ![](https://pubcdn.ivymoda.com/files/product/thumab/1400/2024/11/05/sample4.webp)  \n   - 🔗 [👉 Shop Now](https://ivymoda.com/sanpham/olivia-trench-coat-45029)  \n\nThese pieces will surely elevate your wardrobe! ✨👕"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Show me some jackets you have."
+      },
+      {
+        "role": "assistant",
+        "content": "Here are some fabulous options from our **Jacket Collection**:\n1. **Logan Bomber Jacket**  \n   - 💲 Price: $88.00  \n   - ✨ Description: A modern twist on a classic bomber, perfect for layering in style 🌫️.  \n   - ✅ Availability: In stock  \n   - 🖼️ ![](https://pubcdn.ivymoda.com/files/product/thumab/1400/2024/11/05/sample4.webp)  \n   - 🔗 [👉 Shop Now](https://ivymoda.com/sanpham/logan-bomber-jacket-56203)  \n2. **Ava Denim Jacket**  \n   - 💲 Price: $65.00  \n   - ✨ Description: Timeless jean jacket that works for every occasion 👖  \n   - ✅ Availability: In stock  \n   - 🖼️ ![](https://pubcdn.ivymoda.com/files/product/thumab/1400/2024/11/05/sample4.webp)  \n   - 🔗 [👉 Shop Now](https://ivymoda.com/sanpham/ava-denim-jacket-56205)  \n\nWrap up your look with these effortlessly chic jackets! 🧥✨"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "What pants can you suggest for everyday wear?"
+      },
+      {
+        "role": "assistant",
+        "content": "Check out these versatile picks from our **Pants Collection**:\n1. **Riley Straight-Leg Jeans**  \n   - 💲 Price: $55.00  \n   - ✨ Description: Classic denim with a flattering fit for all body types 👖.  \n   - ✅ Availability: In stock  \n   - 🖼️ ![](https://pubcdn.ivymoda.com/files/product/thumab/1400/2024/11/05/sample4.webp)  \n   - 🔗 [👉 Shop Now](https://ivymoda.com/sanpham/riley-straight-leg-jeans-57401)  \n2. **Carter Khaki Trousers**  \n   - 💲 Price: $60.00  \n   - ✨ Description: Smart choice for both casual and semi-formal occasions 💼  \n   - ✅ Availability: In stock  \n   - 🖼️ ![](https://pubcdn.ivymoda.com/files/product/thumab/1400/2024/11/05/sample4.webp)  \n   - 🔗 [👉 Shop Now](https://ivymoda.com/sanpham/carter-khaki-trousers-57403)  \n\nDiscover your new everyday essentials! 🌟"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "What about dresses? Any recommendations?"
+      },
+      {
+        "role": "assistant",
+        "content": "Feast your eyes on these elegant selections from our **Dress Collection**:\n1. **Sophia Wrap Dress**  \n   - 💲 Price: $75.00  \n   - ✨ Description: Perfect for anything from brunch dates to weddings 👰.  \n   - ✅ Availability: In stock  \n   - 🖼️ ![](https://pubcdn.ivymoda.com/files/product/thumab/1400/2024/11/05/sample4.webp)  \n   - 🔗 [👉 Shop Now](https://ivymoda.com/sanpham/sophia-wrap-dress-58501)  \n2. **Chloe Lace Midi Dress**  \n   - 💲 Price: $95.00  \n   - ✨ Description: Intricate lace detailing for a touch of sophistication 🎀.  \n   - ✅ Availability: In stock  \n   - 🖼️ ![](https://pubcdn.ivymoda.com/files/product/thumab/1400/2024/11/05/sample4.webp)  \n   - 🔗 [👉 Shop Now](https://ivymoda.com/sanpham/chloe-lace-midi-dress-58503)  \n\nElevate your dress collection with these stunners! 👗💖"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Show me some shorts available in your store."
+      },
+      {
+        "role": "assistant",
+        "content": "Here's what's trending in our **Shorts Collection**:\n1. **Finn Cargo Shorts**  \n   - 💲 Price: $48.00  \n   - ✨ Description: Designed for practicality and style with extra pockets 🔄.  \n   - ✅ Availability: In stock  \n   - 🖼️ ![](https://pubcdn.ivymoda.com/files/product/thumab/1400/2024/11/05/sample4.webp)  \n   - 🔗 [👉 Shop Now](https://ivymoda.com/sanpham/finn-cargo-shorts-59001)  \n2. **Stella High-Rise Denim Shorts**  \n   - 💲 Price: $52.00  \n   - ✨ Description: A classic pair of shorts for fun sunny days 🌞.  \n   - ✅ Availability: In stock  \n   - 🖼️ ![](https://pubcdn.ivymoda.com/files/product/thumab/1400/2024/11/05/sample4.webp)  \n   - 🔗 [👉 Shop Now](https://ivymoda.com/sanpham/stella-high-rise-denim-shorts-59003)  \n\nStay cool and stylish with these! 🌺🩳"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Do you have the Daisy Summer Dress?"
+      },
+      {
+        "role": "assistant",
+        "content": "🌼 Thanks for your interest! Unfortunately, the Daisy Summer Dress is not currently available in our store. However, I can help you search for it via Google Shopping. Would you like me to do that for you? 🛍️"
+      },
+      {
+        "role": "user",
+        "content": "Yes, please help me find it."
+      },
+      {
+        "role": "assistant",
+        "content": "🌟 Great! Here's what I found on Google Shopping:\n- Name: Daisy Summer Dress  \n- Price: $68.50  \n- Source: Zappos  \n- Image: ![](https://serpapi.com/searches/d78a5s0fd4s8f234/images/845dfs9g8f0y8.webp)  \n- [Product link](https://www.google.com/shopping/product/13246883109847238567?gl=us)  \nI hope this helps you find your perfect dress! 💃"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Can you check if you have the Aspen Winter Coat?"
+      },
+      {
+        "role": "assistant",
+        "content": "❄️ Thank you for reaching out! The Aspen Winter Coat is not available in our collection at the moment. Would you like me to help you search for it using Google Shopping? 🛍️"
+      },
+      {
+        "role": "user",
+        "content": "Yes, I would appreciate that!"
+      },
+      {
+        "role": "assistant",
+        "content": "✅ Here's the information I've found via Google Shopping:\n- Name: Aspen Winter Coat  \n- Price: $210.00  \n- Source: Nordstrom  \n- Image: ![](https://serpapi.com/searches/156a4df9f04s8da/images/0e47fb5ddhy5uj.webp)  \n- [Product link](https://www.google.com/shopping/product/18454932578297125095?gl=us)  \nHope this gets you what you're looking for! 🌬️🧥"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Do you have the Orion Quilted Jacket?"
+      },
+      {
+        "role": "assistant",
+        "content": "🚀 Thank you for asking! Sadly, the Orion Quilted Jacket isn't available in our store right now. Would you like me to assist you in finding it through Google Shopping? 🛍️"
+      },
+      {
+        "role": "user",
+        "content": "Yes, please do."
+      },
+      {
+        "role": "assistant",
+        "content": "🌌 Here’s what I found on Google Shopping:\n- Name: Orion Quilted Jacket  \n- Price: $130.99  \n- Source: Macy's  \n- Image: ![](https://serpapi.com/searches/c16afd03f5s6af4/images/5f266ffj8v06a3.webp)  \n- [Product link](https://www.google.com/shopping/product/1955375872306661499?gl=us)  \nLet me know if this is what you were looking for! 🚀🥼"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Do you have the Bella Midi Skirt?"
+      },
+      {
+        "role": "assistant",
+        "content": "🌺 Thank you for your query! Unfortunately, the Bella Midi Skirt is not available in our store at the moment. Would you like me to help you find it via Google Shopping? 🛍️"
+      },
+      {
+        "role": "user",
+        "content": "No, that's okay. I'll look for it elsewhere."
+      },
+      {
+        "role": "assistant",
+        "content": "Got it! If you need more assistance in the future, feel free to reach out. We’re here to help! 😊"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Is the Aurora Silk Blouse available?"
+      },
+      {
+        "role": "assistant",
+        "content": "🌼 Thanks for asking! Sadly, the Aurora Silk Blouse isn't in our inventory right now. Should I help you search for it on Google Shopping? 🛍️"
+      },
+      {
+        "role": "user",
+        "content": "No, I'll pass on that."
+      },
+      {
+        "role": "assistant",
+        "content": "Understood! If there's anything else you need or have any questions, just let us know. We're happy to assist you! 🖤"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Do you have the Everest Parka Coat in stock?"
+      },
+      {
+        "role": "assistant",
+        "content": "❄️ Thank you for your interest! The Everest Parka Coat is not currently available in our store. Would you like some help finding it using Google Shopping? 🛍️"
+      },
+      {
+        "role": "user",
+        "content": "No, thank you. I'll try somewhere else."
+      },
+      {
+        "role": "assistant",
+        "content": "No problem at all! Should you need any more help or have further queries, feel free to reach out. We’re always here to assist you! 🌟"
+      }
+    ]
+  }
+]
