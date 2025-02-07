@@ -71,7 +71,14 @@ Deployed version: (coming soon)
   LANGCHAIN_API_KEY=
   LANGCHAIN_PROJECT=
   ```
-- Load env: `uv run server/scripts/load_env.py`
+- Load env: `make load_env`
+
+OR
+
+```
+export OPENAI_API_KEY=
+...
+```
 
 ### 📚 Prepare data (only needs to be done once)
 - Run `make create_knowledge_base`

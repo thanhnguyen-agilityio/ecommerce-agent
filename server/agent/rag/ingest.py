@@ -16,10 +16,14 @@ import os
 import sys
 from typing import List, Tuple
 
+from dotenv import find_dotenv, load_dotenv
 from langchain.docstore.document import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_chroma import Chroma
 from tqdm import tqdm
+
+# Load the .env file
+load_dotenv(find_dotenv(), override=True)
 
 # CONFIG PATH WHEN RUN SCRIPT TO ALLOW IMPORT MODULE FROM PARENT DIR: server
 # ----------------------------------------------------------------

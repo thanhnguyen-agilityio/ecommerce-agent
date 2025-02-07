@@ -1,4 +1,11 @@
+Topic:
 - [doc](https://docs.google.com/document/d/1z0VgEIQkmU3rv2gwrQMf0PMnjUCT7a2sak66sSNaORc/edit?usp=sharing)
+- [project](https://github.com/users/thanhnguyen-agilityio/projects/2)
+
+Current:
+- [!7](https://github.com/thanhnguyen-agilityio/ivymoda-agent/issues/7) Run up previous practice
+- [!2](https://github.com/thanhnguyen-agilityio/ivymoda-agent/issues/2) Handle multi-agents architects - supervisors POC
+
 
 Plan draft:
 - Clone practice 2 - LangChain advanced - Ivy moda agent
