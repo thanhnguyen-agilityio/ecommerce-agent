@@ -20,10 +20,10 @@ with st.sidebar:
         """
         Hi there! 👋
 
-        I'm here to assist you with all your shopping needs on IVY Moda!
+        I'm here to assist you with all your shopping needs on ecommerce platform!
 
         Contact us via:
-        - 📧 cskh@ivy.com.vn
+        - 📧 hi@ecommerce.com
         - 📞 0905 89 86 83
         - 🕔 Monday to Saturday (8:00 AM to 5:30 PM)
         """

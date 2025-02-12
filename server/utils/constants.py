@@ -9,12 +9,12 @@ VECTOR_STORE_COLLECTION_NAME: str = os.getenv(
 )
 
 # LLM
-# CHAT_MODEL = "gpt-4o-mini"
+CHAT_MODEL = "gpt-4o-mini"
 # CHAT_MODEL = "ft:gpt-4o-mini-2024-07-18:personal::AsRZDK2g"
 # latest version fined tuning Jan-23-2025
 # CHAT_MODEL = "ft:gpt-4o-mini-2024-07-18:personal::AsoAVb75"
 # CHAT_MODEL = "ft:gpt-4o-mini-2024-07-18:personal::At3NtTKB"  # epoch: 10
-CHAT_MODEL = "ft:gpt-4o-mini-2024-07-18:personal::At8ejesE"  # epoch: 10
+# CHAT_MODEL = "ft:gpt-4o-mini-2024-07-18:personal::At8ejesE"  # epoch: 10
 
 CHAT_MODEL_TEMPERATURE = 0.2
 EMBEDDING_MODEL = "text-embedding-3-small"

@@ -35,18 +35,18 @@ def target_function(inputs: dict):
 
 
 client = Client()
-dataset_name = "IVY Moda Golden Data Set Fine Tuning"
+dataset_name = "Ecommerce Golden Data Set Fine Tuning"
 evaluate(
     target_function,
     data=dataset_name,
     evaluators=[compare_semantic_similarity, is_concise_enough, latency_evaluator],
-    experiment_prefix="IVY Moda Golden Data Set Fine Tuning Experiment",
+    experiment_prefix="Ecommerce Golden Data Set Fine Tuning Experiment",
     num_repetitions=2,
 )
 
 
 # # TASK: Run 1 example with ID
-# # "IVY Moda Golden Data Set"
+# # "Ecommerce Golden Data Set"
 # dataset_id = "12e5f450-fac3-4b2c-b167-4a80c1c6b386"
 # # Give me list of policies
 # example_id = "d5dd3bc6-3646-4f41-b63c-eaabd5d62e86"

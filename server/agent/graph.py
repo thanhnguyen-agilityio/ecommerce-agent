@@ -31,7 +31,7 @@ tools = [
     check_and_execute_query_tool,
     search_google_shopping,
 ]
-set_llm_cache(SQLiteCache(database_path="db/ivy_chatbot_cache.db"))
+set_llm_cache(SQLiteCache(database_path="db/ecommerce_chatbot_cache.db"))
 
 
 def prepare_model_inputs(state: AgentState, config: RunnableConfig, store: BaseStore):

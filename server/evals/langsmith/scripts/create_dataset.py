@@ -30,8 +30,8 @@ def create_dataset(csv_file_path):
 
 if __name__ == "__main__":
     client = Client()
-    dataset_id = "ivy-moda-dataset"
-    dataset = create_dataset("assets/ivy-moda-dataset.csv")
+    dataset_id = "ecommerce-agent-dataset"
+    dataset = create_dataset("assets/ecommerce-agent-dataset.csv")
 
     # Prepare inputs and outputs for bulk creation
     inputs = []

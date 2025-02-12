@@ -21,7 +21,7 @@ from langchain_core.prompts import PromptTemplate
 from langchain_core.tools import tool
 from utils.utils import get_path
 
-db_path = get_path("ivy_store.db", "db")
+db_path = get_path("ecommerce_store.db", "db")
 db = SQLDatabase.from_uri(
     f"sqlite:///{db_path}",
     # No sample to avoid issue on sample url image not correct

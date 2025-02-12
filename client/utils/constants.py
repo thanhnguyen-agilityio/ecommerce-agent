@@ -1,3 +1,5 @@
+import random
+
 API_BASE_URL = "http://localhost:8080"
 
 
@@ -20,3 +22,6 @@ BOT_AVATAR_CHOICE = [
     "./assets/images/bot-avatar-bg.jpeg",
     "./assets/images/bot-avatar.png",
 ]
+
+USER_AVATAR = random.choice(USER_AVATAR_CHOICE)
+BOT_AVATAR = random.choice(BOT_AVATAR_CHOICE)

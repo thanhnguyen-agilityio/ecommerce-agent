@@ -7,7 +7,7 @@ from utils.utils import get_path
 
 def get_system_message(use_hub: bool = False):
     if use_hub:
-        hub_prompt_template = hub.pull("chat-ivy-moda")
+        hub_prompt_template = hub.pull("ecommerce-agent-prompt")
         system_message = hub_prompt_template.messages[0].prompt.template
     else:
         try:

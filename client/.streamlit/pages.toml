@@ -1,6 +1,6 @@
 [[pages]]
 path = "pages/agent.py"
-name = "Chat with IVY Moda"
+name = "eCommerce Agent"
 icon = "🛍️"
 url_path = "."
 

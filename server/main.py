@@ -5,9 +5,9 @@ from routers.health import router as health_router
 from routers.history import router as history_router
 
 app = FastAPI(
-    title="IVY Moda Customer Support Chat Bot Server",
+    title="Customer Support Chat Bot Agent Server",
     version="0.1.0",
-    description="IVY Moda Customer Support Chat Bot Server",
+    description="Customer Support Agent Server",
 )
 
 app.add_middleware(

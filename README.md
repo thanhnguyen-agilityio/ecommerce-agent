@@ -1,11 +1,9 @@
-# 🛍️ Chat IVY Moda
+# 🛍️ Ecommerce Customer Support Agent
 
-This repo is an implementation of a chatbot specifically focused on question answering over the [IVY Moda website](https://ivymoda.com/).
+This repo is an implementation of a chatbot specifically focused on question answering over the Ecommerce website
 Built with [LangChain](https://github.com/langchain-ai/langchain/), [LangGraph](https://github.com/langchain-ai/langgraph/), and [Streamlit](https://streamlit.io/).
 
 ![](assets/images/app.png)
-
-Deployed version: (coming soon)
 
 ## Prerequisites
 - [uv](https://docs.astral.sh/uv/)
@@ -38,8 +36,7 @@ Deployed version: (coming soon)
 - Vector Store
   - [Chroma](https://docs.trychroma.com/): Chroma is the AI-native open-source vector database. Chroma makes it easy to build LLM apps by making knowledge, facts, and skills pluggable for LLMs.
     - [LangChain integrate with Chroma](https://python.langchain.com/docs/integrations/vectorstores/chroma/)
-- Deployment (optional)
-  - [AWS Copilot CLI](https://aws.github.io/copilot-cli/): AWS Copilot is an open source command line interface that makes it easy for developers to build, release, and operate production ready containerized applications on AWS App Runner, Amazon ECS, and AWS Fargate.
+
 
 ## 🛠️ Tools
 - [uv](https://docs.astral.sh/uv/): Python package manager
@@ -47,19 +44,17 @@ Deployed version: (coming soon)
 - [ruff](https://github.com/astral-sh/ruff): Python linter
 - [langchain-cli](https://python.langchain.com/docs/langchain-cli/): LangChain CLI
 - [remote-pdb](https://github.com/jupyter/remote-pdb): Remote debugger
-- [LangGraph Studio](https://www.langchain.com/langgraph): LangGraph Studio is a tool for visualizing and debugging LangGraph graphs.
-- [Docker](https://www.docker.com/): Docker is a platform for building, shipping, and running applications in containers. Require to run LangGraph Studio
 
 
 ## 📚 Setup
 ### ⬇️ Clone repo
 - Clone repo with branch
   ```bash
-  git clone git@github.com:thanhnguyen-agilityio/ivymoda-agent.git
+  git clone https://github.com/thanhnguyen-agilityio/ecommerce-agent
   ```
 - Access project folder
   ```bash
-  cd ivymoda-agent
+  ecommerce-agent
   ```
 
 ### 📦 Init environment
@@ -123,6 +118,4 @@ print(db.run("SELECT * FROM Product LIMIT 2;"))
 - [Slide Review](https://gamma.app/docs/Customer-support-chatbot-5dnee8e4n8r14pn)
 
 ## Authors
-- Trainee: Thanh Nguyen
-- Mentor: Cong Dang
-- Supporters: Duc Pham, Hoang Tran
+- Thanh Nguyen

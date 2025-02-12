@@ -4,7 +4,7 @@ import streamlit as st
 from langchain_community.chat_message_histories import StreamlitChatMessageHistory
 from langchain_core.messages import ChatMessage
 from services.chat_service import ChatService
-from utils.constants import WELCOME_MESSAGE
+from utils.constants import BOT_AVATAR, WELCOME_MESSAGE
 from utils.utils import convert_chat_message, render_message
 
 expander = st.expander("Quick Start:")
@@ -15,11 +15,10 @@ expander.write(
     - Do you offer free shipping?
 
     👉 Products:
-    - Give me product "Serge Checkered Wide-Leg Pants"
-    - Compare "Long Sleeves Tencel Shirt" with "Sleeves Style Shirt"
-    - Do you have "Regular Striped Shirt" in size L?
-    - Do you have "Bloom T-shirt" in size M?
-    - Give me some products in category "Jackets".
+    - Give me product "Dreamy Styled Collar Shirt"
+    - Compare "Straight Cut Button-down Collar Shirt" with "DIVAS Polo T-shirt"
+    - Do you have "Magnolia Tuytsi Blazer" in size L?
+    - Give me some products in category "jacket".
 
     👉 FAQs:
     - How can I maintain the shape of my clothing?
@@ -43,14 +42,19 @@ history = StreamlitChatMessageHistory(
 with st.spinner("Loading..."):
     try:
         messages = chat_service.chat_history()
-        history.messages = [
-            convert_chat_message(message["type"], message["content"])
-            for message in messages
-        ]
+        history_message_convert = []
+        for message in messages:
+            message_convert = convert_chat_message(message["type"], message["content"])
+            # print("message_convert: ", message_convert)
+            if message_convert:
+                history_message_convert.append(message_convert)
+
+        history.messages = history_message_convert
     except Exception:
         pass
 
 # Show history messages to UI
+# print("history.messages: ", history.messages)
 for msg in history.messages:
     render_message(msg)
 
@@ -67,11 +71,10 @@ if prompt := st.chat_input(placeholder="Give me categories list."):
     render_message(chat_message)
     history.add_message(chat_message)
 
-    with st.chat_message("assistant"):
-        with st.spinner("Processing..."):
-            try:
-                response = chat_service.chat_stream(prompt)
-                st.write_stream(response)
-            except Exception as e:
-                st.error(str(e))
-                st.stop()
+    with st.chat_message("assistant", avatar=BOT_AVATAR):
+        try:
+            response = chat_service.chat_stream(prompt)
+            st.write_stream(response)
+        except Exception as e:
+            st.error(str(e))
+            st.stop()

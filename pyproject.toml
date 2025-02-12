@@ -1,7 +1,7 @@
 [project]
-name = "chat-ivy-moda"
+name = "ecommerce-agent"
 version = "0.1.0"
-description = "IVY Moda Customer Support Chat Bot"
+description = "Customer Support Agent"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
