@@ -27,6 +27,7 @@ db = SQLDatabase.from_uri(
     # No sample to avoid issue on sample url image not correct
     sample_rows_in_table_info=0,
 )
+print(db.run("SELECT * FROM Product LIMIT 2;"))
 sql_db_list_tables = ListSQLDatabaseTool(
     db=db,
     description="""

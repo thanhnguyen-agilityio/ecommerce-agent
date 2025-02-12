@@ -13,7 +13,7 @@ from sqlalchemy import (
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 
 # Define the database file name
-db_file = os.path.abspath("server/db/ivy_store.db")
+db_file = os.path.abspath("server/db/ecommerce_store.db")
 
 # Set up the database engine and session
 engine = create_engine(f"sqlite:///{db_file}")
@@ -38,11 +38,11 @@ class Product(Base):
     name = Column(String, nullable=False)
     description = Column(String, nullable=True)
     price = Column(Float, nullable=False)
-    out_of_stock = Column(Boolean, default=False)
+    quantity = Column(Integer, default=0)
     category_id = Column(Integer, ForeignKey("Category.id"), nullable=False)
     category = relationship("Category", back_populates="products")
     sizes = Column(String, nullable=True)  # Comma-separated list of sizes
-    images = Column(String, nullable=True)  # Comma-separated list of image URLs
+    thumbnail = Column(String, nullable=True)  # Comma-separated list of image URLs
     url = Column(String, nullable=True)
 
 
@@ -69,12 +69,10 @@ def load_json_to_db(json_file):
             name=product["name"],
             description=product.get("description"),
             price=product["price"],
-            out_of_stock=product["out_of_stock"],
+            quantity=product["quantity"],
             category=category,
             sizes=",".join(product.get("sizes", [])),
-            images=",".join(
-                product.get("images", [])
-            ),  # Join image URLs into a single string
+            thumbnail=product.get("thumbnail", ""),
             url=product.get("url", f"https://ivymoda.com?q={product['name']}"),
         )
         session.add(new_product)
@@ -85,7 +83,7 @@ def load_json_to_db(json_file):
 
 if __name__ == "__main__":
     # Path to your JSON file
-    json_file = os.path.abspath("server/data/products.json")
+    json_file = os.path.abspath("server/data/v2/products_v2.json")
 
     # Load data into the database
     load_json_to_db(json_file)
