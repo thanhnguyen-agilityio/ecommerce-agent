@@ -1,34 +1,40 @@
 Topic:
-- [doc](https://docs.google.com/document/d/1z0VgEIQkmU3rv2gwrQMf0PMnjUCT7a2sak66sSNaORc/edit?usp=sharing)
+- [doc](https://docs.google.com/document/d/1z0VgEIQkmU3rv2gwrQMf0PMnjUCT7a2sak66sSNaORc/edit?tab=t.0#heading=h.lk913ur2m3ux)
 - [project](https://github.com/users/thanhnguyen-agilityio/projects/2)
 
-Current:
-- [!7](https://github.com/thanhnguyen-agilityio/ivymoda-agent/issues/7) Run up previous practice
-- [!2](https://github.com/thanhnguyen-agilityio/ivymoda-agent/issues/2) Handle multi-agents architects - supervisors POC
+
+## Tasks
+
+- [x] Clone practice 2 - LangChain advanced - Ivy moda agent
+- [x] Context update - remove Ivy moda branding out of data, all data in english
+  - Reason: this branding makes confusion more than helpful. Since the audience could ask why they need to data clone, why not use an online search tool directly.
+  - Actions:
+    - [x] 1. scrape ecommerce data with crawler (ref: Scrape from website instead of manual create ([Deepseek + Crawl4AI](https://www.youtube.com/watch?v=Osl4NgAXvRk)))
+    - [x] 2. update documents related to remove branding
+    - [x] 3. update product json with new data
+- [ ] [HIGHEST] Flow update (v1)
+  - Reason: apply human in the loop
+  - Actions:
+    - Separate tools
+      - Safe tools: RAG, Search product in db
+      - Sensitive tools: Search Google Shopping
+    - Add human-in-the-loops for sensitive tools
+     (Ref: [Build customer support chatbot](https://langchain-ai.github.io/langgraph/tutorials/customer-support/customer-support/) part 1,2,3)
+- [ ] [HIGH] Flow update (v2)
+  - Reason: add user info to graph, add more sensitive tools
+  - Actions:
+    - Update to use Supabase database
+      - Setup Supabase database with products
+      - Update code to use Supabase
+    - Handle user authentication with Supabase
+      - Add fetch user information node
+      - Add tool to update user profile (sensitive tools)
+
+This practice will build a customer support agent follow this diagram
+![](https://langchain-ai.github.io/langgraph/tutorials/customer-support/img/part-3-diagram.png)
 
 
-Plan draft:
-- Clone practice 2 - LangChain advanced - Ivy moda agent
-- List out all stuff needed to update and order by priority
-- Run up previous practice
-    - [highest] Refactor agent with new flow - deadline Feb 14th
-      - [#2][TODO] Handle multi-agents architects - supervisors POC
-        - Supervisor → detect intent → service agent (query, categories)
-        - Supervisor → detect intent → product agent
-    - [TODO] Handle service agent
-        - Keep as it is now.
-        - Parallel retrieve service by categories: faqs, policies, etc.
-        - [Enhance] Clean up retrieval result
-        - [Enhance] Order by relevant
-    - [TODO] Handle product agent
-        - Retrieve product in db (sql tools)
-        - If not found, ask user if they want to use search tool (human-in-the-loop)
-        - Retrieve product with search tool
-    - [low] Add new features
-        - Cart Agent (add, remove, update product in cart)
-        - Order Agent (place an order, tracking order status)
-        - Payment Agent (pay the order with 3-rd party)
-        - Account Agent (update profile, payment methods, address)
-    - Enhance product
-        - [low] Scrap ivymoda website and build db automatically (replace current manually data)
-        - [low] Switch to vietnamese for product
+## Repositories:
+- [Ecommerce Crawler](https://github.com/thanhnguyen-agilityio/ecommerce-crawler)
+- [Ecommerce agent](https://github.com/thanhnguyen-agilityio/ecommerce-agent)
+- [Fine-tuning LLM for ecommerce agent](https://github.com/thanhnguyen-agilityio/ecommerce-agent-fine-tuning)

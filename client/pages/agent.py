@@ -72,9 +72,10 @@ if prompt := st.chat_input(placeholder="Give me categories list."):
     history.add_message(chat_message)
 
     with st.chat_message("assistant", avatar=BOT_AVATAR):
-        try:
-            response = chat_service.chat_stream(prompt)
-            st.write_stream(response)
-        except Exception as e:
-            st.error(str(e))
-            st.stop()
+        with st.spinner("Thinking..."):
+            try:
+                response = chat_service.chat_stream(prompt)
+                st.write_stream(response)
+            except Exception as e:
+                st.error(str(e))
+                st.stop()
