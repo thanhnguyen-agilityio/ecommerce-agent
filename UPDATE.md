@@ -38,3 +38,28 @@ This practice will build a customer support agent follow this diagram
 - [Ecommerce Crawler](https://github.com/thanhnguyen-agilityio/ecommerce-crawler)
 - [Ecommerce agent](https://github.com/thanhnguyen-agilityio/ecommerce-agent)
 - [Fine-tuning LLM for ecommerce agent](https://github.com/thanhnguyen-agilityio/ecommerce-agent-fine-tuning)
+
+
+## Demo Customer Support ReAct Agent
+- **App**
+	- Side bar, pages
+	- Conversation UI: chat, avatars
+- **Use Cases**
+	- **Say Hi**:
+		"Hello"
+	- **Ask service questions**:
+		"Do you offer free shipping?"
+		"How can I maintain the shape of my clothing?"
+		"Do you allow return product?"
+	- **Search product**:
+		Give me product "Dreamy Styled Collar Shirt"
+		Do you have "Magnolia Tuytsi Blazer" in size L?
+	- **Compare products**:
+		Compare "Straight Cut Button-down Collar Shirt" with "DIVAS Polo T-shirt"
+	- **Search product not in store**:
+	   Do you have "Embroidered Blouse"?
+	- **Ask not relevant question**:
+	   I'm tired. What should I do to protect my health?
+- **Others**
+	- Load old thread: `52c1e9b3-b1e6-465e-b70a-3ae12ddd490e`
+	- Error handler (unable to connect to server)
