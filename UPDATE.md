@@ -63,3 +63,12 @@ This practice will build a customer support agent follow this diagram
 - **Others**
 	- Load old thread: `52c1e9b3-b1e6-465e-b70a-3ae12ddd490e`
 	- Error handler (unable to connect to server)
+
+
+
+## Create support ticket data:
+Help me create a support ticket with data:
+- Name: Thanh Nguyen
+- Email: nguyendiemthanhdn92@gmail.com
+- Subject: Change size or refund product
+- Content: Dear Ecommerce Customer Service, I recently purchased a skirt (Order #123), but the size doesn’t fit, so I’d like to request either an exchange for L or a refund—please let me know the next steps.
