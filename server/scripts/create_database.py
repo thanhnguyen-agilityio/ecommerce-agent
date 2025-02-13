@@ -41,9 +41,19 @@ class Product(Base):
     quantity = Column(Integer, default=0)
     category_id = Column(Integer, ForeignKey("Category.id"), nullable=False)
     category = relationship("Category", back_populates="products")
-    sizes = Column(String, nullable=True)  # Comma-separated list of sizes
-    thumbnail = Column(String, nullable=True)  # Comma-separated list of image URLs
+    sizes = Column(String, nullable=True)
+    thumbnail = Column(String, nullable=True)
     url = Column(String, nullable=True)
+
+
+class SupportTicket(Base):
+    __tablename__ = "SupportTicket"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String, nullable=True)
+    email = Column(String, nullable=False)
+    subject = Column(String, nullable=False)
+    content = Column(String, nullable=True)
+    resolved = Column(Boolean, default=False)
 
 
 # Create the tables
@@ -87,4 +97,5 @@ if __name__ == "__main__":
 
     # Load data into the database
     load_json_to_db(json_file)
+
     print("Data has been loaded into the database.")

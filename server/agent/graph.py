@@ -3,6 +3,7 @@ import sqlite3
 import utils.constants as constants
 from agent.llms import init_chat_model
 from agent.prompts.prompt import get_chat_prompt, get_system_message
+from agent.tools.create_support_ticket import create_support_ticket
 from agent.tools.lookup_documents import lookup_documents
 from agent.tools.save_memory import save_memory
 from agent.tools.search_google_shopping import search_google_shopping
@@ -30,6 +31,7 @@ tools = [
     sql_db_list_tables,
     check_and_execute_query_tool,
     search_google_shopping,
+    create_support_ticket,
 ]
 set_llm_cache(SQLiteCache(database_path="db/ecommerce_chatbot_cache.db"))
 
