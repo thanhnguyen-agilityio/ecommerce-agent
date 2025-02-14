@@ -18,6 +18,7 @@ from langchain_community.cache import SQLiteCache
 from langchain_core.globals import set_llm_cache
 from langchain_core.messages import AIMessage
 from langchain_core.runnables import Runnable, RunnableConfig
+from langchain_core.tools import tool
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.graph import END, START, MessagesState, StateGraph
@@ -29,22 +30,31 @@ from langgraph.types import Command, interrupt
 from typing_extensions import Literal, TypedDict
 from utils.utils import create_tool_node_with_fallback, get_path
 
-# store, memory, and cache
-# store = InMemoryStore()
-memory = SqliteSaver(
-    sqlite3.connect(get_path("checkpoints.sqlite", "db"), check_same_thread=False)
+# Setup
+# Store (in-memory) and checkpoint memory (sqlite db)
+store = InMemoryStore()
+conn = sqlite3.connect(
+    get_path("checkpoints.sqlite", "db"), check_same_thread=False
 )
-# set_llm_cache(SQLiteCache(database_path="db/eßcommerce_chatbot_cache.db"))
+memory = SqliteSaver(conn)
+# Cache (sqlite db)
+set_llm_cache(SQLiteCache(database_path="db/ecommerce_chatbot_cache.db"))
 
-# tools
-safe_tools = []
-sensitive_tools = [lookup_documents, create_support_ticket]
+# Tools
+safe_tools = [
+    # save_memory,
+    # lookup_documents,
+    # sql_db_schema,
+    # sql_db_list_tables,
+    # check_and_execute_query_tool,
+    # search_google_shopping,
+]
+sensitive_tools = [
+    create_support_ticket
+]
 tools = safe_tools + sensitive_tools
 sensitive_tool_names = {t.name for t in sensitive_tools}
-tools_map = {
-    "lookup_documents": lookup_documents,
-    "create_support_ticket": create_support_ticket
-}
+
 def prepare_model_inputs(state: AgentState, config: RunnableConfig, store: BaseStore):
     # Retrieve user memories and add them to the system message
     # This function is called **every time** the model is prompted. It converts the state to a prompt
@@ -54,7 +64,7 @@ def prepare_model_inputs(state: AgentState, config: RunnableConfig, store: BaseS
     system_message = get_system_message(use_hub=False)
     return get_chat_prompt(system_message, memories)
 
-def create_assistant_runnable(chat_model):
+def create_prompt_runnable():
     # Retrieve user memories and add them to the system message
     # This function is called **every time** the model is prompted. It converts the state to a prompt
     # user_id = config.get("configurable", {}).get("user_id")
@@ -62,7 +72,8 @@ def create_assistant_runnable(chat_model):
     # memories = [m.value["data"] for m in store.search(namespace)]
     memories = []
     system_message = get_system_message(use_hub=False)
-    return get_chat_prompt(system_message, memories) | chat_model.bind_tools(tools=tools)
+    return get_chat_prompt(system_message, memories)
+
 
 
 # Setup graph
@@ -80,69 +91,150 @@ class Assistant:
         return {"messages": result}
 
 def route_tools(state: State):
-        next_node = tools_condition(state)
-        print("next_node: ", next_node)
-        # If no tools are invoked, return to the user
-        if next_node == END:
-            print("Route to END")
-            return END
+    next_node = tools_condition(state)
+    # If no tools are invoked, return to the user
+    if next_node == END:
+        return END
+    ai_message = state["messages"][-1]
+    # This assumes single tool calls. To handle parallel tool calling, you'd want to
+    # use an ANY condition
+    first_tool_call = ai_message.tool_calls[0]
+    if first_tool_call["name"] in sensitive_tool_names:
+        return "sensitive_tools"
 
-        ai_message = state["messages"][-1]
-        # This assumes single tool calls. To handle parallel tool calling, you'd want to
-        # use an ANY condition
-        first_tool_call = ai_message.tool_calls[0]
-        if first_tool_call["name"] in sensitive_tool_names:
-            print("Route to sensitive tools")
-            return "sensitive_tools"
+    return "safe_tools"
 
-        print("Route to safe tools")
-        return "safe_tools"
+def human_review_node(state) -> Command[Literal["assistant", "run_tool"]]:
+    last_message = state["messages"][-1]
+    tool_call = last_message.tool_calls[-1]
 
-def safe_tools_node(state: State):
-    return {"messages": [AIMessage(content="Safe tools node")]}
+    # this is the value we'll be providing via Command(resume=<human_review>)
+    human_review = interrupt(
+        {
+            "question": "Is this correct?",
+            # Surface tool calls for review
+            "tool_call": tool_call,
+        }
+    )
 
-def sensitive_tools_node(state: State):
-    return {"messages": [AIMessage(content="Sensitive tools node")]}
+    review_action = human_review["action"]
+    review_data = human_review.get("data")
+
+    # if approved, call the tool
+    if review_action == "continue":
+        return Command(goto="run_tool")
+
+    # elif review_action == "cancel":
+    #     return Command(goto="assistant")
+
+    # # update the AI message AND call tools
+    # elif review_action == "update":
+    #     updated_message = {
+    #         "role": "ai",
+    #         "content": last_message.content,
+    #         "tool_calls": [
+    #             {
+    #                 "id": tool_call["id"],
+    #                 "name": tool_call["name"],
+    #                 # This the update provided by the human
+    #                 "args": review_data,
+    #             }
+    #         ],
+    #         # This is important - this needs to be the same as the message you replacing!
+    #         # Otherwise, it will show up as a separate message
+    #         "id": last_message.id,
+    #     }
+    #     return Command(goto="run_tool", update={"messages": [updated_message]})
+
+    # # provide feedback to LLM
+    elif review_action == "feedback":
+        # NOTE: we're adding feedback message as a ToolMessage
+        # to preserve the correct order in the message history
+        # (AI messages with tool calls need to be followed by tool call messages)
+        tool_message = {
+            "role": "tool",
+            # This is our natural language feedback
+            "content": review_data,
+            "name": tool_call["name"],
+            "tool_call_id": tool_call["id"],
+        }
+        return Command(goto="assistant", update={"messages": [tool_message]})
+
+def run_tool(state):
+    new_messages = []
+    tools = {"create_support_ticket": create_support_ticket}
+    tool_calls = state["messages"][-1].tool_calls
+    for tool_call in tool_calls:
+        tool = tools[tool_call["name"]]
+        result = tool.invoke(tool_call["args"])
+        new_messages.append(
+            {
+                "role": "tool",
+                "name": tool_call["name"],
+                "content": result,
+                "tool_call_id": tool_call["id"],
+            }
+        )
+    return {"messages": new_messages}
+
+def route_after_llm(state) -> Literal[END, "human_review_node"]:
+    if len(state["messages"][-1].tool_calls) == 0:
+        return END
+    else:
+        return "human_review_node"
+
 
 def init_graph(
     model_name=constants.CHAT_MODEL,
     temperature=constants.CHAT_MODEL_TEMPERATURE,
     streaming=True,
 ):
-    # assistant runnable
+    # Define model
     chat_model = init_chat_model(
         model_name=model_name,
         temperature=temperature,
         streaming=streaming,
         callbacks=([StreamingStdOutCallbackHandler()] if streaming else []),
     )
-    assistant_runnable = create_assistant_runnable(chat_model)
+    chat_model.bind_tools(tools=tools)
+    runnable_prompt = create_prompt_runnable()
+    assistant_runnable = runnable_prompt | chat_model
 
     # Build graph
     builder = StateGraph(State)
+    # Define nodes: these do the work
     builder.add_node("assistant", Assistant(assistant_runnable))
-    builder.add_node("safe_tools", create_tool_node_with_fallback(safe_tools))
-    builder.add_node("sensitive_tools", create_tool_node_with_fallback(sensitive_tools))
-
-    # builder.add_node("safe_tools", safe_tools_node)
-    # builder.add_node("sensitive_tools", sensitive_tools_node)
-
+    builder.add_node(run_tool)
+    builder.add_node(human_review_node)
+    # builder.add_node("tools", create_tool_node_with_fallback(tools))
+    # builder.add_node("safe_tools", create_tool_node_with_fallback(safe_tools))
+    # builder.add_node("sensitive_tools", create_tool_node_with_fallback(sensitive_tools))
 
     # Define edges: these determine how the control flow moves
     builder.add_edge(START, "assistant")
-    builder.add_conditional_edges(
-        "assistant", route_tools, ["safe_tools", "sensitive_tools", END]
-    )
-    builder.add_edge("safe_tools", "assistant")
-    builder.add_edge("sensitive_tools", "assistant")
+    builder.add_conditional_edges("assistant", route_after_llm)
+    builder.add_edge("run_tool", "assistant")
+    # builder.add_conditional_edges(
+    #     "assistant", route_tools, ["safe_tools", "sensitive_tools", END]
+    # )
+    # builder.add_edge("safe_tools", "assistant")
+    # builder.add_edge("sensitive_tools", "assistant")
     graph_agent = builder.compile(
         checkpointer=memory,
-        # store=store,
-        interrupt_before=["sensitive_tools"],
-        debug=True,
+        store=store,
+        # interrupt_before=["tools"]
     )
+    # graph_agent = create_react_agent(
+    #     chat_model,
+    #     tools=tools,
+    #     state_modifier=prepare_model_inputs,
+    #     store=store,
+    #     checkpointer=memory,
+    #     # debug=True,
+    # )
 
-    # print(graph_agent.get_graph().draw_mermaid())
+
+    print(graph_agent.get_graph().draw_mermaid())
     return graph_agent
 
 

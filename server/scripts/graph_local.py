@@ -2,6 +2,8 @@ import os
 import sys
 import uuid
 
+from langgraph.types import Command
+
 # CONFIG PATH WHEN RUN SCRIPT TO ALLOW IMPORT MODULE FROM PARENT DIR: server
 # ----------------------------------------------------------------
 root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -43,7 +45,7 @@ def check_graph_interruption(config):
 def continue_interruption(config):
     # Continue to use tool
     print("continue the interruption:")
-    events = graph.stream(None, config, stream_mode="values")
+    events = graph.stream(Command(resume={"action": "continue"}), config, stream_mode="values")
     for event in events:
         if "messages" in event:
             event["messages"][-1].pretty_print()
@@ -73,24 +75,24 @@ if __name__ == "__main__":
         }
     }
 
-    # while True:
-    #     try:
-    #         user_input = input("User: ")
-    #         if user_input.lower() in ["quit", "exit", "q"]:
-    #             print("Goodbye!")
-    #             break
+    while True:
+        try:
+            user_input = input("User: ")
+            if user_input.lower() in ["quit", "exit", "q"]:
+                print("Goodbye!")
+                break
 
-    #         stream_graph_updates(user_input, config)
+            stream_graph_updates(user_input, config)
 
-    #         # check_graph_interruption(config)
+            check_graph_interruption(config)
     #         # continue_interruption(config)
-    #     except Exception as e:
-    #         # fallback if input() is not available
-    #         print("Error:", e)
-    #         user_input = "Hi there! My name is Will."
-    #         print("User: " + user_input)
-    #         stream_graph_updates(user_input, config)
-    #         break
+        except Exception as e:
+            # fallback if input() is not available
+            print("Error:", e)
+            user_input = "Hi there! My name is Will."
+            print("User: " + user_input)
+            stream_graph_updates(user_input, config)
+            break
 
     # TEST INVOKE
     while True:

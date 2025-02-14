@@ -34,6 +34,7 @@ def lookup_documents(document_request: DocumentRequest) -> list[Document]:
 
     Use only when `intent = service`.
     """
+    print("CALL TOOL lookup_documents")
     query = document_request.query
     service_categories = document_request.service_categories
     docs = []
