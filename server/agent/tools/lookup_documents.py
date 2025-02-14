@@ -1,7 +1,7 @@
 from agent.rag.retriever import get_retriever
 from langchain_core.documents import Document
 from langchain_core.tools import tool
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ValidationError, field_validator
 
 
 class DocumentRequest(BaseModel):
@@ -12,12 +12,16 @@ class DocumentRequest(BaseModel):
         min_length=0,
     )
 
-    # For test retry tool: uncomment below code
-    # Only allow 1 categories, if model give 2, it will retry to have only 1 categories
-    # Test query: "What are Shipping cost payment methods?" -> model will give 2 categories: faqs, policies
-    # service_categories: list[str] = Field(
-    #     max_length=1, min_length=0,
-    # )
+    @field_validator('service_categories')
+    @classmethod
+    def validate_service_categories(cls, value):
+        if not value:
+            raise ValidationError('service_categories cannot be empty')
+
+        if set(value) - {"faqs", "policies"}:
+            raise ValidationError('service_categories must be either "faqs" or "policies"')
+
+        return value
 
 
 @tool
