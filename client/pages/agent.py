@@ -1,3 +1,5 @@
+import asyncio
+import json
 import random
 
 import streamlit as st
@@ -10,22 +12,85 @@ from utils.utils import convert_chat_message, render_message
 expander = st.expander("Quick Start:")
 expander.write(
     """
-    👉 Services:
+    💁‍♀️ Services:
     - Give me list categories
     - Do you offer free shipping?
+    - How can I maintain the shape of my clothing?
 
-    👉 Products:
+    💁‍♀️ Products:
     - Give me product "Dreamy Styled Collar Shirt"
     - Compare "Straight Cut Button-down Collar Shirt" with "DIVAS Polo T-shirt"
     - Do you have "Magnolia Tuytsi Blazer" in size L?
+    - Is there "Flowing basic shirt" in the store?
     - Give me some products in category "jacket".
 
-    👉 FAQs:
-    - How can I maintain the shape of my clothing?
+    💁‍♀️ Create support ticket:
+    - I want to create a support ticket.
 
     🎯 Tip: short and specific.
     """
 )
+
+# Initialize event loop - use to stream response customize with human approval
+if "loop" not in st.session_state:
+    st.session_state.loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(st.session_state.loop)
+
+def handle_approve():
+    chat_service.approve_tool_call(st.session_state.tool_call_id)
+
+def handle_reject():
+    chat_service.reject_tool_call(st.session_state.tool_call_id)
+
+async def process_response(response):
+    async for content in response:
+        if isinstance(content, str):
+            response_holder[0] += content
+            message_placeholder.markdown(response_holder[0] + "▌")
+            continue
+
+        if content["require_approval"]:
+            print("Verification required:", content)
+            message = content["message"]
+            tool_call_data = content["tool_call_data"]
+            st.session_state.tool_call_id = tool_call_data["id"]
+
+            response_holder[0] += message
+            message_placeholder.markdown(response_holder[0])
+
+            # Create approve,reject button
+            # Create columns for buttons
+            col1, col2 = st.columns(2)
+            with col1:
+                st.button(
+                    "Yes",
+                    key="approve_button",
+                    type="tertiary",
+                    icon="✅",
+                    use_container_width=True,
+                    on_click=handle_approve,
+                )
+            with col2:
+                st.button(
+                    "No",
+                    key="reject_button",
+                    type="tertiary",
+                    icon="❌",
+                    use_container_width=True,
+                    on_click=handle_reject
+                )
+
+            return response_holder[0]
+        else:
+            response_holder[0] += content.get("content", "")
+            message_placeholder.markdown(response_holder[0] + "▌")
+
+    message_placeholder.markdown(response_holder[0])
+    if response_holder[0]:
+        history.add_message(
+            ChatMessage(role="assistant", content=response_holder[0])
+        )
+
 
 # Initialize chat service
 chat_service = ChatService(
@@ -72,10 +137,24 @@ if prompt := st.chat_input(placeholder="Give me categories list."):
     history.add_message(chat_message)
 
     with st.chat_message("assistant", avatar=BOT_AVATAR):
+        message_placeholder = st.empty()
+        response_holder = [""]
+
         with st.spinner("Thinking..."):
             try:
                 response = chat_service.chat_stream(prompt)
-                st.write_stream(response)
+
+                st.session_state.loop.run_until_complete(process_response(response))
+
+                # If not have human approval, stream response is simple
+                # st.write_stream(response)
+
+                # With human approval, stream response need to handle manually
+
+                # if response["require_approval"]:
+                #     st.button('Approve', on_click=approve_action, args=[1])
+                # else:
+                #     st.write_stream(response)
             except Exception as e:
-                st.error(str(e))
+                st.error(e)
                 st.stop()
