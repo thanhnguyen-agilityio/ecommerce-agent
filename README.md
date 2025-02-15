@@ -3,9 +3,10 @@
 This repo is an implementation of a chatbot specifically focused on question answering over the Ecommerce website
 Built with [LangChain](https://github.com/langchain-ai/langchain/), [LangGraph](https://github.com/langchain-ai/langgraph/), and [Streamlit](https://streamlit.io/).
 
-![](assets/images/1-agent.png)
+![](assets/images/agentUI.png)
 
 - [View App Demo Here](https://drive.google.com/file/d/19dxR40F_zafoHGQmU47APaZngN7lZG85/view?usp=sharing)
+- View more images at folder `assests/images`
 
 ## Prerequisites
 - [uv](https://docs.astral.sh/uv/)
