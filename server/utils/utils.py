@@ -48,6 +48,15 @@ def count_time(func):
 
     return wrapper
 
+def build_require_approval_message(tool_call_data: dict) -> dict:
+    print("tool_call_data: ", tool_call_data)
+    message = f"**Action Required: Please Confirm**\n\nWe are about to create a support ticket on your behalf. Please review the details below and confirm:\n"
+
+    for arg_name, arg_value in tool_call_data["args"].items():
+        message += f"\n  - {arg_name.title()}: {arg_value}"
+
+    message += "\n\nOur support team will assist you directly based on this information. Please ensure all details are accurate before proceeding. Do you confirm?"
+    return message
 
 # ----- LangGraph Utils - before use prebuilt create_react_agent -----
 # from langchain_core.messages import ToolMessage
@@ -74,3 +83,4 @@ def create_tool_node_with_fallback(tools: list) -> dict:
     )
 
 # ----- LangGraph Utils - before use prebuilt create_react_agent -----
+

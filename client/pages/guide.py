@@ -29,6 +29,7 @@ st.markdown(
     - Help me create a support ticket with below details:
         - Name: "John Doe"
         - Email: "john.doe@gmail.com"
+        - Phone number: "0123456789"
         - Subject: "I have a problem with my order"
         - Description: "I received the wrong item in my order. Help me resolve this issue."
 

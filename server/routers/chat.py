@@ -7,6 +7,7 @@ from fastapi import APIRouter
 from fastapi.responses import Response, StreamingResponse
 from langchain_core.messages import AIMessage, AIMessageChunk, ToolMessage
 from schema.schema import ChatRequest, ToolCallApprovalRequest
+from utils.utils import build_require_approval_message
 
 router = APIRouter(prefix="/chat", tags=[""])
 
@@ -21,7 +22,7 @@ async def chat_invoke(request: ChatRequest):
         }
     }
     messages = [("user", request.message)]
-    graph = init_graph()
+    graph = init_graph(config=config)
     response = graph.invoke({"messages": messages}, config)["messages"][0].content
     return Response(
         response,
@@ -57,7 +58,7 @@ async def stream_agent_response(request: ChatRequest) -> AsyncGenerator[bytes, N
         }
     }
     messages = [("user", request.message)]
-    graph = init_graph()
+    graph = init_graph(config=config)
     events = graph.stream({"messages": messages}, config, stream_mode="messages")
 
     for event in events:
@@ -73,12 +74,11 @@ async def stream_agent_response(request: ChatRequest) -> AsyncGenerator[bytes, N
     print(snapshot.values["messages"][-1].tool_calls)
     if snapshot.next and snapshot.next[0] == "sensitive_tools":
         tool_call_data = snapshot.values["messages"][-1].tool_calls[0]
-        print("tool_call_data: ", tool_call_data)
         yield json.dumps({
             "require_approval": True,
-            "message": f"I will call sensitive tool: {tool_call_data['name']}. Please help approve to continue.",
+            "message": build_require_approval_message(tool_call_data),
             "thread_id": request.thread_id,
-            "tool_call_data": tool_call_data
+            "tool_call_data": tool_call_data,
         }).encode("utf-8")
 
 @router.post("/stream")
@@ -107,7 +107,7 @@ async def approve_action(request: ToolCallApprovalRequest):
             "user_id": request.user_id,
         }
     }
-    graph = init_graph()
+    graph = init_graph(config=config)
 
     # Continue the graph
     graph.invoke(None, config)
@@ -122,7 +122,7 @@ async def reject_action(request: ToolCallApprovalRequest):
             "user_id": request.user_id,
         }
     }
-    graph = init_graph()
+    graph = init_graph(config=config)
 
     # Continue graph with reject tool message
     graph.invoke(

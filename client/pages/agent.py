@@ -26,11 +26,6 @@ expander.write(
 
     💁‍♀️ Create support ticket:
     - I want to create a support ticket.
-    - Help me create a support ticket with below details:
-        - Name: "John Doe"
-        - Email: "john.doe@gmail.com"
-        - Subject: "I have a problem with my order"
-        - Description: "I received the wrong item in my order. Help me resolve this issue."
 
     🎯 Tip: short and specific.
     """
@@ -67,9 +62,23 @@ async def process_response(response):
             # Create columns for buttons
             col1, col2 = st.columns(2)
             with col1:
-                st.button("Approve", key="approve_button", on_click=handle_approve)
+                st.button(
+                    "Yes",
+                    key="approve_button",
+                    type="tertiary",
+                    icon="✅",
+                    use_container_width=True,
+                    on_click=handle_approve,
+                )
             with col2:
-                st.button("Reject", key="reject_button", on_click=handle_reject)
+                st.button(
+                    "No",
+                    key="reject_button",
+                    type="tertiary",
+                    icon="❌",
+                    use_container_width=True,
+                    on_click=handle_reject
+                )
 
             return response_holder[0]
         else:

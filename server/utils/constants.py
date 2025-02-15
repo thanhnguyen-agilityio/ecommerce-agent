@@ -10,7 +10,7 @@ VECTOR_STORE_COLLECTION_NAME: str = os.getenv(
 
 # LLM
 # CHAT_MODEL = "gpt-4o-mini"
-CHAT_MODEL = "ft:gpt-4o-mini-2024-07-18:personal::B14jtcJU"
+CHAT_MODEL = "ft:gpt-4o-mini-2024-07-18:personal::B16sK6xs"
 
 CHAT_MODEL_TEMPERATURE = 0.2
 EMBEDDING_MODEL = "text-embedding-3-small"

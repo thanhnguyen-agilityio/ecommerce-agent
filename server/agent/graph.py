@@ -21,15 +21,17 @@ from langgraph.types import Command, interrupt
 from typing_extensions import Literal, TypedDict
 from utils.utils import create_tool_node_with_fallback, get_path
 
-# store, memory, and cache
-# store = InMemoryStore()
+# Initialize store, memory, and cache
+store = InMemoryStore()
 memory = SqliteSaver(
     sqlite3.connect(get_path("checkpoints.sqlite", "db"), check_same_thread=False)
 )
-# set_llm_cache(SQLiteCache(database_path="db/eßcommerce_chatbot_cache.db"))
+set_llm_cache(SQLiteCache(database_path="db/eßcommerce_chatbot_cache.db"))
+
 
 class State(MessagesState):
     pass
+
 
 class Assistant:
     def __init__(self, runnable: Runnable):
@@ -40,29 +42,23 @@ class Assistant:
         return {"messages": result}
 
 
-def prepare_model_inputs(state: AgentState, config: RunnableConfig, store: BaseStore):
-    # Retrieve user memories and add them to the system message
-    # This function is called **every time** the model is prompted. It converts the state to a prompt
-    user_id = config.get("configurable", {}).get("user_id")
-    namespace = ("memories", user_id)
-    memories = [m.value["data"] for m in store.search(namespace)]
-    system_message = get_system_message(use_hub=False)
-    return get_chat_prompt(system_message, memories)
+def create_assistant_runnable(chat_model, config):
+    if not config:
+        raise ValueError("config is required to create assistant runnable")
 
-def create_assistant_runnable(chat_model):
     # Config model with tool calling
     chat_model_bind_tools = chat_model.bind_tools(tools=list(tools_mapping.values()))
 
     # Config system prompt
     memories = []
     system_message = get_system_message(use_hub=False)
-    # Retrieve user memories and add them to the system message
-    # This function is called **every time** the model is prompted. It converts the state to a prompt
-    # user_id = config.get("configurable", {}).get("user_id")
-    # namespace = ("memories", user_id)
-    # memories = [m.value["data"] for m in store.search(namespace)]
+    # retrieve user memories and add them to the system message
+    user_id = config.get("configurable", {}).get("user_id")
+    namespace = ("memories", user_id)
+    memories = [m.value["data"] for m in store.search(namespace)]
 
     return get_chat_prompt(system_message, memories) | chat_model_bind_tools
+
 
 def route_tools(state: State):
     """
@@ -83,10 +79,12 @@ def route_tools(state: State):
 
     return "safe_tools"
 
+
 def init_graph(
     model_name=constants.CHAT_MODEL,
     temperature=constants.CHAT_MODEL_TEMPERATURE,
     streaming=True,
+    config=None,
 ):
     # Prepare nodes
     chat_model = init_chat_model(
@@ -95,7 +93,7 @@ def init_graph(
         streaming=streaming,
         callbacks=([StreamingStdOutCallbackHandler()] if streaming else []),
     )
-    node_assistant = Assistant(create_assistant_runnable(chat_model))
+    node_assistant = Assistant(create_assistant_runnable(chat_model, config))
     node_safe_tools = create_tool_node_with_fallback(safe_tools)
     node_sensitive_tools = create_tool_node_with_fallback(sensitive_tools)
 
@@ -117,10 +115,10 @@ def init_graph(
     builder.add_edge("sensitive_tools", "assistant")
     graph_agent = builder.compile(
         checkpointer=memory,
-        # store=store,
+        store=store,
         interrupt_before=["sensitive_tools"],
         debug=True,
     )
 
-    # print(graph_agent.get_graph().draw_mermaid())
+    print(graph_agent.get_graph().draw_mermaid())
     return graph_agent
