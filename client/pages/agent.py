@@ -12,18 +12,25 @@ from utils.utils import convert_chat_message, render_message
 expander = st.expander("Quick Start:")
 expander.write(
     """
-    👉 Services:
+    💁‍♀️ Services:
     - Give me list categories
     - Do you offer free shipping?
+    - How can I maintain the shape of my clothing?
 
-    👉 Products:
+    💁‍♀️ Products:
     - Give me product "Dreamy Styled Collar Shirt"
     - Compare "Straight Cut Button-down Collar Shirt" with "DIVAS Polo T-shirt"
     - Do you have "Magnolia Tuytsi Blazer" in size L?
+    - Is there "Flowing basic shirt" in the store?
     - Give me some products in category "jacket".
 
-    👉 FAQs:
-    - How can I maintain the shape of my clothing?
+    💁‍♀️ Create support ticket:
+    - I want to create a support ticket.
+    - Help me create a support ticket with below details:
+        - Name: "John Doe"
+        - Email: "john.doe@gmail.com"
+        - Subject: "I have a problem with my order"
+        - Description: "I received the wrong item in my order. Help me resolve this issue."
 
     🎯 Tip: short and specific.
     """

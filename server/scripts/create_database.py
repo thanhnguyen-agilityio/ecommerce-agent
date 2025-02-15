@@ -51,8 +51,9 @@ class SupportTicket(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String, nullable=True)
     email = Column(String, nullable=False)
+    phone = Column(String, nullable=True)
     subject = Column(String, nullable=False)
-    content = Column(String, nullable=True)
+    description = Column(String, nullable=True)
     resolved = Column(Boolean, default=False)
 
 

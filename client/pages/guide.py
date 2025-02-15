@@ -6,23 +6,31 @@ st.markdown(
 
     Here’s how you can use this chat:
 
-    1️⃣ Get Help with Services:
+    💁‍♀️ Get Help with Services:
     - Give me list categories
     - Give me list policies
     - Do you allow return product?
     - What is your privacy policy?
     - Do you offer free shipping?
 
-    2️⃣ Inquire About Products in Store:
+    💁‍♀️ Inquire About Products in Store:
     - Give me product "Dreamy Styled Collar Shirts"
     - Compare "Straight Cut Button-down Collar Shirt" with "DIVAS Polo T-shirt"
     - Is "Magnolia Tuytsi Blazer" in stock?
     - Do you have "Magnolia Tuytsi Blazer" in size L?
     - Give me some products in category "jacket".
 
-    3️⃣ Find FAQs Quickly:
+    💁‍♀️ Find FAQs Quickly:
     - How can I change the delivery address for my order?
     - How can I maintain the shape of my clothing?
+
+    💁‍♀️ Create support ticket:
+    - I want to create a support ticket.
+    - Help me create a support ticket with below details:
+        - Name: "John Doe"
+        - Email: "john.doe@gmail.com"
+        - Subject: "I have a problem with my order"
+        - Description: "I received the wrong item in my order. Help me resolve this issue."
 
     ---
 
