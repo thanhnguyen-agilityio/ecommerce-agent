@@ -2,7 +2,7 @@ import sqlite3
 
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain_community.cache import SQLiteCache
-from langchain_core.messages import RemoveMessage
+from langchain_core.messages import trim_messages
 from langchain_core.globals import set_llm_cache
 from langchain_core.runnables import Runnable, RunnableConfig
 from langgraph.checkpoint.sqlite import SqliteSaver
@@ -10,7 +10,7 @@ from langgraph.graph import END, START, MessagesState, StateGraph
 from langgraph.prebuilt import tools_condition
 from langgraph.store.memory import InMemoryStore
 
-from agent.llms import init_chat_model
+from agent.llms import init_chat_model, model_gpt_4o_mini
 from agent.prompts.prompt import get_chat_prompt, get_system_message
 from agent.tools import (
     safe_tools,
@@ -39,6 +39,17 @@ class Assistant:
         self.runnable = runnable
 
     def __call__(self, state: State, config: RunnableConfig):
+        # Trim message by token count
+        messages = trim_messages(
+            state["messages"],
+            max_tokens=1000,
+            strategy="last",
+            token_counter=model_gpt_4o_mini,
+            allow_partial=False
+        )
+        state["messages"] = messages
+
+        # Invoke assistant
         result = self.runnable.invoke(state)
         return {"messages": result}
 
@@ -80,16 +91,6 @@ def route_tools(state: State):
 
     return "safe_tools"
 
-
-def filter_messages(state: MessagesState):
-    # FIX ME: There is an issue with tool message.
-    # Log Error: https://smith.langchain.com/public/1205b3f1-deec-4b08-915a-e87a57f79d7a/r
-
-    # Delete all but keep the most 5 recent messages
-    # delete_message = [RemoveMessage(id=m.id) for m in state["messages"][:-5]]
-    # return {"messages": delete_message}
-    return {"messages": state["messages"]}
-
 def init_graph(
     model_name=constants.CHAT_MODEL,
     temperature=constants.CHAT_MODEL_TEMPERATURE,
@@ -110,14 +111,12 @@ def init_graph(
     # Build graph
     builder = StateGraph(State)
     # - add nodes
-    builder.add_node("filter", filter_messages)
     builder.add_node("assistant", node_assistant)
     builder.add_node("safe_tools", node_safe_tools)
     builder.add_node("sensitive_tools", node_sensitive_tools)
 
     # - define edges
-    builder.add_edge(START, "filter")
-    builder.add_edge("filter", "assistant")
+    builder.add_edge(START, "assistant")
     builder.add_conditional_edges(
         "assistant",
         route_tools,
