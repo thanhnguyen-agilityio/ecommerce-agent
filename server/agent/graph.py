@@ -3,22 +3,20 @@ import sqlite3
 import utils.constants as constants
 from agent.llms import init_chat_model
 from agent.prompts.prompt import get_chat_prompt, get_system_message
-from agent.tools import safe_tools, sensitive_tool_names, sensitive_tools, tools_mapping
-from IPython.display import Image, display
+from agent.tools import (
+    safe_tools,
+    sensitive_tool_names,
+    sensitive_tools,
+    tools_mapping
+)
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain_community.cache import SQLiteCache
 from langchain_core.globals import set_llm_cache
-from langchain_core.messages import AIMessage
 from langchain_core.runnables import Runnable, RunnableConfig
-from langgraph.checkpoint.memory import MemorySaver
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.graph import END, START, MessagesState, StateGraph
 from langgraph.prebuilt import tools_condition
-from langgraph.prebuilt.chat_agent_executor import AgentState
-from langgraph.store.base import BaseStore
 from langgraph.store.memory import InMemoryStore
-from langgraph.types import Command, interrupt
-from typing_extensions import Literal, TypedDict
 from utils.utils import create_tool_node_with_fallback, get_path
 
 # Initialize store, memory, and cache
@@ -26,7 +24,7 @@ store = InMemoryStore()
 memory = SqliteSaver(
     sqlite3.connect(get_path("checkpoints.sqlite", "db"), check_same_thread=False)
 )
-set_llm_cache(SQLiteCache(database_path="db/eßcommerce_chatbot_cache.db"))
+set_llm_cache(SQLiteCache(database_path="db/ecommerce_chatbot_cache.db"))
 
 
 class State(MessagesState):
@@ -120,5 +118,6 @@ def init_graph(
         debug=True,
     )
 
-    print(graph_agent.get_graph().draw_mermaid())
+    # For testing graph visualization
+    # print(graph_agent.get_graph().draw_mermaid())
     return graph_agent
