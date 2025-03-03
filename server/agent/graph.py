@@ -2,7 +2,7 @@ import sqlite3
 
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain_community.cache import SQLiteCache
-from langchain_core.messages import trim_messages
+from langchain_core.messages import trim_messages, HumanMessage, RemoveMessage
 from langchain_core.globals import set_llm_cache
 from langchain_core.runnables import Runnable, RunnableConfig
 from langgraph.checkpoint.sqlite import SqliteSaver
@@ -31,7 +31,7 @@ set_llm_cache(SQLiteCache(database_path="db/ecommerce_chatbot_cache.db"))
 
 
 class State(MessagesState):
-    pass
+    summary: str = ""
 
 
 class Assistant:
@@ -91,6 +91,37 @@ def route_tools(state: State):
 
     return "safe_tools"
 
+
+def summarize_conversation(state: State):
+    if len(state["messages"]) <= 6:
+        return state
+
+    summary = state.get("summary", "")
+
+    if summary:
+        summary_message = (
+            f"This is summary of the conversation to date: {summary}\n\n"
+            "Extend the summary by taking into account the new messages above:"
+        )
+    else:
+        summary_message = "Create a summary of the conversation above:"
+
+
+    # Add prompt to our history
+    messages = state["messages"] + [HumanMessage(content=summary_message)]
+    response = model_gpt_4o_mini.invoke(messages)
+
+    # Delete all but the 5 most recent messages
+    delete_messages = [
+        RemoveMessage(id=m.id) for m in state["messages"][:-5]
+    ]
+
+    return {
+        "summary": response.content,
+        "messages": delete_messages,
+    }
+
+
 def init_graph(
     model_name=constants.CHAT_MODEL,
     temperature=constants.CHAT_MODEL_TEMPERATURE,
@@ -112,11 +143,13 @@ def init_graph(
     builder = StateGraph(State)
     # - add nodes
     builder.add_node("assistant", node_assistant)
+    builder.add_node("summarize_conversation", summarize_conversation)
     builder.add_node("safe_tools", node_safe_tools)
     builder.add_node("sensitive_tools", node_sensitive_tools)
 
     # - define edges
-    builder.add_edge(START, "assistant")
+    builder.add_edge(START, "summarize_conversation")
+    builder.add_edge("summarize_conversation", "assistant")
     builder.add_conditional_edges(
         "assistant",
         route_tools,
@@ -132,5 +165,5 @@ def init_graph(
     )
 
     # For testing graph visualization
-    # print(graph_agent.get_graph().draw_mermaid())
+    print(graph_agent.get_graph().draw_mermaid())
     return graph_agent
