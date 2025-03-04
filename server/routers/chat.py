@@ -59,15 +59,16 @@ async def stream_agent_response(request: ChatRequest) -> AsyncGenerator[bytes, N
     }
     messages = [("user", request.message)]
     graph = init_graph(config=config)
-    events = graph.stream({"messages": messages}, config, stream_mode="messages")
 
-    for event in events:
-        for chunk in event:
-            if isinstance(chunk, AIMessageChunk):
-                if chunk.content:
-                    yield json.dumps(chunk.content).encode("utf-8")
-                    # wait a bit for smooth streaming
-                    await asyncio.sleep(0.05)
+    # Stream messages of assistant node
+    for msg, metadata in graph.stream(
+        {"messages": messages},
+        config,
+        stream_mode="messages"
+    ):
+        if metadata["langgraph_node"] == "assistant":
+            yield json.dumps(msg.content).encode("utf-8")
+            await asyncio.sleep(0.05)
 
     # interrupt
     snapshot = graph.get_state(config)
