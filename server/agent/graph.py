@@ -1,33 +1,27 @@
 import sqlite3
 
+import utils.constants as constants
+from agent.llms import init_chat_model, model_gpt_4o_mini
+from agent.prompts.prompt import get_chat_prompt, get_system_message
+from agent.tools import safe_tools, sensitive_tool_names, sensitive_tools, tools_mapping
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
-from langchain_community.cache import SQLiteCache
-from langchain_core.messages import trim_messages, HumanMessage, RemoveMessage
-from langchain_core.globals import set_llm_cache
+
+# from langchain_community.cache import SQLiteCache
+# from langchain_core.globals import set_llm_cache
+from langchain_core.messages import HumanMessage, RemoveMessage, trim_messages
 from langchain_core.runnables import Runnable, RunnableConfig
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.graph import END, START, MessagesState, StateGraph
 from langgraph.prebuilt import tools_condition
 from langgraph.store.memory import InMemoryStore
-
-from agent.llms import init_chat_model, model_gpt_4o_mini
-from agent.prompts.prompt import get_chat_prompt, get_system_message
-from agent.tools import (
-    safe_tools,
-    sensitive_tool_names,
-    sensitive_tools,
-    tools_mapping
-)
-import utils.constants as constants
 from utils.utils import create_tool_node_with_fallback, get_path
-
 
 # Initialize store, memory, and cache
 store = InMemoryStore()
 memory = SqliteSaver(
     sqlite3.connect(get_path("checkpoints.sqlite", "db"), check_same_thread=False)
 )
-set_llm_cache(SQLiteCache(database_path="db/ecommerce_chatbot_cache.db"))
+# set_llm_cache(SQLiteCache(database_path="db/ecommerce_chatbot_cache.db"))
 
 
 class State(MessagesState):
@@ -50,7 +44,12 @@ class Assistant:
         state["messages"] = messages
 
         # Invoke assistant
-        result = self.runnable.invoke(state)
+        try:
+            result = self.runnable.invoke(state)
+        except Exception as e:
+            # FIXME: There is an issue of multiple tools with langgraph
+            # openai.BadRequestError: Error code: 400 - {'error': {'message': "Invalid parameter: messages with role 'tool' must be a response to a preceeding message with 'tool_calls'.", 'type': 'invalid_request_error', 'param': 'messages.[1].role', 'code': None}}
+            raise ValueError("Error in server: ", e)
         return {"messages": result}
 
 
@@ -143,6 +142,7 @@ def init_graph(
     builder = StateGraph(State)
     # - add nodes
     builder.add_node("assistant", node_assistant)
+    #
     builder.add_node("summarize_conversation", summarize_conversation)
     builder.add_node("safe_tools", node_safe_tools)
     builder.add_node("sensitive_tools", node_sensitive_tools)
@@ -165,5 +165,5 @@ def init_graph(
     )
 
     # For testing graph visualization
-    print(graph_agent.get_graph().draw_mermaid())
+    # print(graph_agent.get_graph().draw_mermaid())
     return graph_agent

@@ -2,18 +2,16 @@ import logging
 
 from langchain import hub
 from langchain_core.prompts import ChatPromptTemplate
-from utils.utils import get_path
+from utils.constants import PROMPT_FILE, PROMPT_HUB_NAME, USE_PROMPT_HUB
 
 
-def get_system_message(use_hub: bool = False):
+def get_system_message(use_hub: bool = USE_PROMPT_HUB):
     if use_hub:
-        hub_prompt_template = hub.pull("ecommerce-agent-prompt")
+        hub_prompt_template = hub.pull(PROMPT_HUB_NAME)
         system_message = hub_prompt_template.messages[0].prompt.template
     else:
         try:
-            system_message_file_path = get_path(
-                "agent_prompt_with_fine_tuning_model_v2.md", "agent/prompts"
-            )
+            system_message_file_path = PROMPT_FILE
             with open(system_message_file_path, "r") as f:
                 system_message = f.read()
         except FileNotFoundError as e:
@@ -26,7 +24,7 @@ def get_system_message(use_hub: bool = False):
 
 
 def get_chat_prompt(system_message: str, memories: list = None):
-    system_message = get_system_message(use_hub=False)
+    system_message = get_system_message(use_hub=USE_PROMPT_HUB)
     memories = memories or []
     return ChatPromptTemplate.from_messages(
         [

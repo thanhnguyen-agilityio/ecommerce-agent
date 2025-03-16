@@ -14,9 +14,8 @@ for path in [server_path]:
 
 
 from agent.graph import init_graph  # noqa: E402
-from evaluators import (  # noqa: E402
+from evaluators import (  # noqa: E402; is_concise_enough,
     compare_semantic_similarity,
-    is_concise_enough,
     latency_evaluator,
 )
 
@@ -29,18 +28,18 @@ def target_function(inputs: dict):
         }
     }
     messages = [("user", inputs["user_query"])]
-    graph = init_graph(streaming=False)
+    graph = init_graph(config=config)
     response = graph.invoke({"messages": messages}, config)
     return response["messages"][-1].content
 
 
 client = Client()
-dataset_name = "Ecommerce Golden Data Set Fine Tuning"
+dataset_name = "ecommerce-agent-dataset-with-fine-tuned-model"
 evaluate(
     target_function,
     data=dataset_name,
-    evaluators=[compare_semantic_similarity, is_concise_enough, latency_evaluator],
-    experiment_prefix="Ecommerce Golden Data Set Fine Tuning Experiment",
+    evaluators=[compare_semantic_similarity, latency_evaluator],
+    experiment_prefix="Ecommerce Agent Data Set Fine Tuning Experiment",
     num_repetitions=2,
 )
 

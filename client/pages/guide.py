@@ -14,10 +14,11 @@ st.markdown(
     - Do you offer free shipping?
 
     💁‍♀️ Inquire About Products in Store:
-    - Give me product "Dreamy Styled Collar Shirts"
-    - Compare "Straight Cut Button-down Collar Shirt" with "DIVAS Polo T-shirt"
-    - Is "Magnolia Tuytsi Blazer" in stock?
-    - Do you have "Magnolia Tuytsi Blazer" in size L?
+    - Give me product "Tweed A Timeless Dress"
+    - Give me product "Straight Cut Button-down Collar Shirt"
+    - Compare "Regular Khaki Drop Pants" with "Regular Point Man Khaki Pants"
+    - Is "Velvet flared dress with puffy sleeves" in stock?
+    - Do you have "Super Light Padded Jacket
     - Give me some products in category "jacket".
 
     💁‍♀️ Find FAQs Quickly:

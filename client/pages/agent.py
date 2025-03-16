@@ -18,11 +18,8 @@ expander.write(
     - How can I maintain the shape of my clothing?
 
     💁‍♀️ Products:
-    - Give me product "Dreamy Styled Collar Shirt"
-    - Compare "Straight Cut Button-down Collar Shirt" with "DIVAS Polo T-shirt"
-    - Do you have "Magnolia Tuytsi Blazer" in size L?
-    - Is there "Flowing basic shirt" in the store?
-    - Give me some products in category "jacket".
+    - Give me product "Tweed A Timeless Dress"
+    - Compare "Gilded Prowl Skirt" with "Khaki Mini Skirt"
 
     💁‍♀️ Create support ticket:
     - I want to create a support ticket.

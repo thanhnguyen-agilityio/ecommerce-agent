@@ -12,5 +12,5 @@
 - Run evaluation:
 ```
 cd server
-uv run langsmith/experiment.py
+uv run evals/langsmith/experiment.py
 ```

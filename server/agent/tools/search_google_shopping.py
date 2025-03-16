@@ -34,6 +34,7 @@ def search_google_shopping(query: str) -> dict:
         "url": first_result.get("product_link", ""),
     }
 
+    # mock for save quotas
     # return {
     #     "name": "Mock Product Name",
     #     "price": "$100",
