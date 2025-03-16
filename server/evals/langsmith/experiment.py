@@ -40,7 +40,7 @@ evaluate(
     data=dataset_name,
     evaluators=[compare_semantic_similarity, latency_evaluator],
     experiment_prefix="Ecommerce Agent Data Set Fine Tuning Experiment",
-    num_repetitions=2,
+    num_repetitions=1,
 )
 
 
