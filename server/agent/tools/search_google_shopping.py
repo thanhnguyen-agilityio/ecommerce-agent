@@ -6,7 +6,7 @@ from langchain_core.tools import tool
 def search_google_shopping(query: str) -> dict:
     """
     Search for products from Google Shopping if unavailable in the store's database.
-    This tool need user permission, only call this tool when user intent is `accept_search_google`
+    This tool need user permission, only call this tool when user `intent` is `accept_search_google`
 
     Input: Product name or description.
     Example query: `"Blue cotton shirt, size M"`

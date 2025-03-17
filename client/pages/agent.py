@@ -18,8 +18,8 @@ expander.write(
     - How can I maintain the shape of my clothing?
 
     💁‍♀️ Products:
-    - Give me product "Tweed A Timeless Dress"
-    - Compare "Gilded Prowl Skirt" with "Khaki Mini Skirt"
+    - Give me product "Velvet flared dress with puffy sleeves"
+    - Compare "Tapta Fitted Dress with Collared Neck" and "Eclipse Flared Lace Dress"
 
     💁‍♀️ Create support ticket:
     - I want to create a support ticket.

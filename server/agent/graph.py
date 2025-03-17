@@ -1,27 +1,32 @@
 import sqlite3
 
-import utils.constants as constants
-from agent.llms import init_chat_model, model_gpt_4o_mini
-from agent.prompts.prompt import get_chat_prompt, get_system_message
-from agent.tools import safe_tools, sensitive_tool_names, sensitive_tools, tools_mapping
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
-
-# from langchain_community.cache import SQLiteCache
-# from langchain_core.globals import set_llm_cache
+from langchain_community.cache import SQLiteCache
+from langchain_core.globals import set_llm_cache
 from langchain_core.messages import HumanMessage, RemoveMessage, trim_messages
 from langchain_core.runnables import Runnable, RunnableConfig
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.graph import END, START, MessagesState, StateGraph
 from langgraph.prebuilt import tools_condition
 from langgraph.store.memory import InMemoryStore
-from utils.utils import create_tool_node_with_fallback, get_path
+
+import utils.constants as constants
+from utils.utils import (
+    create_tool_node_with_fallback,
+    get_path,
+    handle_malformed_messages,
+    handle_keep_recent_messages
+)
+from agent.llms import init_chat_model, model_gpt_4o_mini
+from agent.prompts.prompt import get_chat_prompt, get_system_message
+from agent.tools import safe_tools, sensitive_tool_names, sensitive_tools, tools_mapping
 
 # Initialize store, memory, and cache
 store = InMemoryStore()
 memory = SqliteSaver(
     sqlite3.connect(get_path("checkpoints.sqlite", "db"), check_same_thread=False)
 )
-# set_llm_cache(SQLiteCache(database_path="db/ecommerce_chatbot_cache.db"))
+set_llm_cache(SQLiteCache(database_path="db/ecommerce_chatbot_cache.db"))
 
 
 class State(MessagesState):
@@ -44,12 +49,8 @@ class Assistant:
         state["messages"] = messages
 
         # Invoke assistant
-        try:
-            result = self.runnable.invoke(state)
-        except Exception as e:
-            # FIXME: There is an issue of multiple tools with langgraph
-            # openai.BadRequestError: Error code: 400 - {'error': {'message': "Invalid parameter: messages with role 'tool' must be a response to a preceeding message with 'tool_calls'.", 'type': 'invalid_request_error', 'param': 'messages.[1].role', 'code': None}}
-            raise ValueError("Error in server: ", e)
+        state = handle_malformed_messages(state)
+        result = self.runnable.invoke(state)
         return {"messages": result}
 
 
@@ -58,7 +59,10 @@ def create_assistant_runnable(chat_model, config):
         raise ValueError("config is required to create assistant runnable")
 
     # Config model with tool calling
-    chat_model_bind_tools = chat_model.bind_tools(tools=list(tools_mapping.values()))
+    chat_model_bind_tools = chat_model.bind_tools(
+        tools=list(tools_mapping.values()),
+        # parallel_tool_calls=False
+    )
 
     # Config system prompt
     memories = []
@@ -92,7 +96,9 @@ def route_tools(state: State):
 
 
 def summarize_conversation(state: State):
-    if len(state["messages"]) <= 6:
+    if (
+        len(state["messages"]) <= constants.RECENT_MESSAGE_LIMIT  + 1
+    ):
         return state
 
     summary = state.get("summary", "")
@@ -111,8 +117,13 @@ def summarize_conversation(state: State):
     response = model_gpt_4o_mini.invoke(messages)
 
     # Delete all but the 5 most recent messages
+    recent_messages = handle_keep_recent_messages(
+        messages,
+        recent_messages_number=constants.RECENT_MESSAGE_LIMIT
+    )
     delete_messages = [
-        RemoveMessage(id=m.id) for m in state["messages"][:-5]
+        RemoveMessage(id=m.id) for m in messages
+        if m not in recent_messages
     ]
 
     return {

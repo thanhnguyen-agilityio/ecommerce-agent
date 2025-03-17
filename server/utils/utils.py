@@ -2,7 +2,7 @@ import json
 import os
 import time
 
-from langchain_core.messages import ToolMessage
+from langchain_core.messages import ToolMessage, AIMessage, AnyMessage
 from langchain_core.runnables import RunnableLambda
 from langgraph.prebuilt import ToolNode
 
@@ -84,3 +84,95 @@ def create_tool_node_with_fallback(tools: list) -> dict:
 
 # ----- LangGraph Utils - before use prebuilt create_react_agent -----
 
+
+
+def handle_malformed_messages(state):
+    """
+    Handle malformed messages in the chat history.
+    There is a case when multiple tools cause the chat history to be invalid.
+    Ref: https://langchain-ai.github.io/langgraph/troubleshooting/errors/INVALID_CHAT_HISTORY/
+
+    Args:
+        state (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
+    messages = state["messages"]
+    clean_messages = []
+    last_ai_message_call_tools = None
+
+    for i, msg in enumerate(messages):
+        if isinstance(msg, AIMessage):
+            if msg.tool_calls:
+                last_ai_message_call_tools = msg
+            else:
+                clean_messages.append(msg)
+        elif isinstance(msg, ToolMessage):
+            before_message  = messages[i - 1] if i > 0 else None
+            if before_message:
+                if isinstance(before_message, AIMessage):
+                    ai_message = before_message
+                else:
+                    ai_message = last_ai_message_call_tools
+
+                # Manual create AIMessage for ToolMessage
+                tool_calls = []
+                tool_calls_additional_kwargs = []
+
+                # Find tool_calls data from last AI message
+                if ai_message.tool_calls:
+                    for tool_call in ai_message.tool_calls:
+                        if tool_call["id"] == msg.tool_call_id:
+                            tool_calls.append(tool_call)
+
+                if ai_message.additional_kwargs["tool_calls"]:
+                    for tool_call_additional_kwargs in ai_message.additional_kwargs["tool_calls"]:
+                        if tool_call_additional_kwargs["id"] == msg.tool_call_id:
+                            tool_calls_additional_kwargs.append(tool_call_additional_kwargs)
+
+                tool_ai_message = AIMessage(
+                    content="",
+                    tool_calls=tool_calls,
+                    additional_kwargs={"tool_calls": tool_calls_additional_kwargs}
+                )
+
+            clean_messages.append(tool_ai_message)
+            clean_messages.append(msg)
+        else:
+            clean_messages.append(msg)
+
+    state["messages"] = clean_messages
+    return state
+
+
+def handle_keep_recent_messages(
+        messages: list[AnyMessage],
+        recent_messages_number: int = 5
+) -> list[AnyMessage]:
+    """
+    Util function to keep the recent messages and remove the old ones.
+    """
+    tool_call_ids = set()
+
+    recent_messages = messages[-recent_messages_number:]
+    remove_messages = messages[:-recent_messages_number]
+
+    # Collect tool call IDs from the recent_messages
+    for msg in recent_messages:
+        if hasattr(msg, 'tool_calls'):
+            tool_call_ids.update([tc["id"] for tc in msg.tool_calls])
+
+    # Keeping necessary context for tool calling of the recent_messages
+    for msg in remove_messages:
+        # Keep messages that are responses to recent tool calls
+        if isinstance(msg, ToolMessage) and msg.tool_call_id in tool_call_ids:
+            recent_messages.append(msg)
+        elif (
+            isinstance(msg, AIMessage)
+            and msg.tool_calls
+            and any(tc["id"] in tool_call_ids for tc in msg.tool_calls)
+        ):
+            recent_messages.append(msg)
+
+    return recent_messages

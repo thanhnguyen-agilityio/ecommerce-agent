@@ -14,9 +14,10 @@ st.markdown(
     - Do you offer free shipping?
 
     💁‍♀️ Inquire About Products in Store:
-    - Give me product "Tweed A Timeless Dress"
-    - Give me product "Straight Cut Button-down Collar Shirt"
-    - Compare "Regular Khaki Drop Pants" with "Regular Point Man Khaki Pants"
+    - Give me product "Velvet flared dress with puffy sleeves"
+    - Give me product "Daily Metagent T-shirt"
+    - Compare "Tapta Fitted Dress with Collared Neck" and "Eclipse Flared Lace Dress"
+    - Compare "Gilded Prowl Skirt" with "Khaki Mini Skirt"
     - Is "Velvet flared dress with puffy sleeves" in stock?
     - Do you have "Super Light Padded Jacket
     - Give me some products in category "jacket".
