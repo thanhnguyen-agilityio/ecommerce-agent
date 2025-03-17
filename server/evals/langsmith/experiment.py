@@ -14,10 +14,7 @@ for path in [server_path]:
 
 
 from agent.graph import init_graph  # noqa: E402
-from evaluators import (  # noqa: E402; is_concise_enough,
-    compare_semantic_similarity,
-    latency_evaluator,
-)
+from evaluators import compare_semantic_similarity  # noqa: E402; is_concise_enough,
 
 
 def target_function(inputs: dict):
@@ -38,7 +35,7 @@ dataset_name = "Ecommerce Agent Dataset With Fine Tuned Model"
 evaluate(
     target_function,
     data=dataset_name,
-    evaluators=[compare_semantic_similarity, latency_evaluator],
+    evaluators=[compare_semantic_similarity],
     experiment_prefix="Ecommerce Agent Data Set Fine Tuning Experiment",
     num_repetitions=1,
 )
