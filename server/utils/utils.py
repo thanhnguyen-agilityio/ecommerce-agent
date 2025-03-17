@@ -49,14 +49,21 @@ def count_time(func):
     return wrapper
 
 def build_require_approval_message(tool_call_data: dict) -> dict:
-    print("tool_call_data: ", tool_call_data)
-    message = f"**Action Required: Please Confirm**\n\nWe are about to create a support ticket on your behalf. Please review the details below and confirm:\n"
+    tool_name = tool_call_data["name"]
+    tool_action_msg = ""
+    tool_call_data_str = ""
+
+    if tool_name == "create_support_ticket":
+        tool_action_msg = "We are about to create a support ticket on your behalf"
+    if tool_name == "search_google_shopping":
+        tool_action_msg = "We are about to expand search to Google Shopping"
 
     for arg_name, arg_value in tool_call_data["args"].items():
-        message += f"\n  - {arg_name.title()}: {arg_value}"
+        tool_call_data_str += f"\n  - {arg_name.title()}: {arg_value}"
 
-    message += "\n\nOur support team will assist you directly based on this information. Please ensure all details are accurate before proceeding. Do you confirm?"
-    return message
+    return "**Action Required: Please Confirm**\n\n {action}. Please review the details below and confirm:\n\n {details}".format(
+        action=tool_action_msg, details=tool_call_data_str
+    )
 
 # ----- LangGraph Utils - before use prebuilt create_react_agent -----
 # from langchain_core.messages import ToolMessage
@@ -126,7 +133,7 @@ def handle_malformed_messages(state):
                         if tool_call["id"] == msg.tool_call_id:
                             tool_calls.append(tool_call)
 
-                if ai_message.additional_kwargs["tool_calls"]:
+                if ai_message.additional_kwargs.get("tool_calls"):
                     for tool_call_additional_kwargs in ai_message.additional_kwargs["tool_calls"]:
                         if tool_call_additional_kwargs["id"] == msg.tool_call_id:
                             tool_calls_additional_kwargs.append(tool_call_additional_kwargs)

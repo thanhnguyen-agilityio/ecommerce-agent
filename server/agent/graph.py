@@ -61,7 +61,7 @@ def create_assistant_runnable(chat_model, config):
     # Config model with tool calling
     chat_model_bind_tools = chat_model.bind_tools(
         tools=list(tools_mapping.values()),
-        # parallel_tool_calls=False
+        parallel_tool_calls=False
     )
 
     # Config system prompt

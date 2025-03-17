@@ -9,10 +9,10 @@ safe_tools = [
     check_and_execute_query_tool,
     sql_db_list_tables,
     sql_db_schema,
-    save_memory,
-    search_google_shopping
+    save_memory
 ]
 sensitive_tools = [
+    search_google_shopping,
     create_support_ticket,
 ]
 sensitive_tool_names = {t.name for t in sensitive_tools}
@@ -31,11 +31,5 @@ __all__ = [
     sensitive_tools,
     sensitive_tool_names,
     tools_mapping,
-#     lookup_documents,
-#     sql_db_schema,
-#     sql_db_list_tables,
-#     check_and_execute_query_tool,
-#     search_google_shopping,
-#     save_memory,
 ]
 

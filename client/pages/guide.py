@@ -18,9 +18,9 @@ st.markdown(
     - Give me product "Daily Metagent T-shirt"
     - Compare "Tapta Fitted Dress with Collared Neck" and "Eclipse Flared Lace Dress"
     - Compare "Gilded Prowl Skirt" with "Khaki Mini Skirt"
-    - Is "Velvet flared dress with puffy sleeves" in stock?
-    - Do you have "Super Light Padded Jacket
+    - Do you have "Super Light Padded Jacket"?
     - Give me some products in category "jacket".
+    - Is "Long Sleeve Dress in brown" in stock?
 
     💁‍♀️ Find FAQs Quickly:
     - How can I change the delivery address for my order?

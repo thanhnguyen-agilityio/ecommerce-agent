@@ -69,11 +69,12 @@ def load_json_to_db(json_file):
     for product in data["products"]:
         # Check if the category exists, create it if not
         category_name = product["category"]
-        category = session.query(Category).filter_by(name=category_name).first()
-        if not category:
-            category = Category(name=category_name)
-            session.add(category)
-            session.commit()
+        if category_name:
+            category = session.query(Category).filter_by(name=category_name).first()
+            if not category:
+                category = Category(name=category_name)
+                session.add(category)
+                session.commit()
 
         # Add the product
         new_product = Product(
