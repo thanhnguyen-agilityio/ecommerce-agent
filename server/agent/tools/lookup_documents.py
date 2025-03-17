@@ -9,7 +9,7 @@ class DocumentRequest(BaseModel):
 
     service_categories: list[str] = Field(
         max_length=2,
-        min_length=0,
+        min_length=1,
     )
 
     @field_validator('service_categories')

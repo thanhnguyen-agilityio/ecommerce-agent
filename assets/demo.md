@@ -12,15 +12,15 @@ Today, I will have a demo about Ecommerce Customer Support Agent which build fro
 	-  Ask service questions
 		- Give me list categories
 		- How can I maintain the shape of my clothing?
-	-  Search product: Give me product "Dreamy Styled Collar Shirt"
+	-  Search product: Give me product "Velvet flared dress with puffy sleeves"
 	-  Compare products
-		- Compare "Straight Cut Button-down Collar Shirt" with "DIVAS Polo T-shirt"
+		- Compare "Tapta Fitted Dress with Collared Neck" and "Eclipse Flared Lace Dress"
 	-  Search product not in store
-		- Is there "Flowing basic shirt" in the store?
+		- Give me product "Long Sleeve Dress in brown"
 	-  Create support ticket
 		- I want to create a support ticket.
 	-  Ask not relevant question
-		- Do you have ipPone 14 pro max?
+		- Do you have iPhone 14 pro max?
 
 Thirdly, we go around some other features:
 - Load chat history: `52c1e9b3-b1e6-465e-b70a-3ae12ddd490e`

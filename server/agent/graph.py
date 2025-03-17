@@ -14,7 +14,6 @@ import utils.constants as constants
 from utils.utils import (
     create_tool_node_with_fallback,
     get_path,
-    handle_malformed_messages,
     handle_keep_recent_messages
 )
 from agent.llms import init_chat_model, model_gpt_4o_mini
@@ -49,7 +48,6 @@ class Assistant:
         state["messages"] = messages
 
         # Invoke assistant
-        state = handle_malformed_messages(state)
         result = self.runnable.invoke(state)
         return {"messages": result}
 

@@ -92,65 +92,65 @@ def create_tool_node_with_fallback(tools: list) -> dict:
 # ----- LangGraph Utils - before use prebuilt create_react_agent -----
 
 
+# Note: We disable parallel tool callings then don't need to process the malformed messages
+# def handle_malformed_messages(state):
+#     """
+#     Handle malformed messages in the chat history.
+#     There is a case when multiple tools cause the chat history to be invalid.
+#     Ref: https://langchain-ai.github.io/langgraph/troubleshooting/errors/INVALID_CHAT_HISTORY/
 
-def handle_malformed_messages(state):
-    """
-    Handle malformed messages in the chat history.
-    There is a case when multiple tools cause the chat history to be invalid.
-    Ref: https://langchain-ai.github.io/langgraph/troubleshooting/errors/INVALID_CHAT_HISTORY/
+#     Args:
+#         state (_type_): _description_
 
-    Args:
-        state (_type_): _description_
+#     Returns:
+#         _type_: _description_
+#     """
+#     messages = state["messages"]
+#     clean_messages = []
+#     last_ai_message_call_tools = None
 
-    Returns:
-        _type_: _description_
-    """
-    messages = state["messages"]
-    clean_messages = []
-    last_ai_message_call_tools = None
+#     for i, msg in enumerate(messages):
+#         if isinstance(msg, AIMessage):
+#             if msg.tool_calls:
+#                 last_ai_message_call_tools = msg
+#             else:
+#                 clean_messages.append(msg)
+#         elif isinstance(msg, ToolMessage):
+#             before_message  = messages[i - 1] if i > 0 else None
+#             if before_message:
+#                 if isinstance(before_message, AIMessage):
+#                     ai_message = before_message
+#                 else:
+#                     ai_message = last_ai_message_call_tools
 
-    for i, msg in enumerate(messages):
-        if isinstance(msg, AIMessage):
-            if msg.tool_calls:
-                last_ai_message_call_tools = msg
-            else:
-                clean_messages.append(msg)
-        elif isinstance(msg, ToolMessage):
-            before_message  = messages[i - 1] if i > 0 else None
-            if before_message:
-                if isinstance(before_message, AIMessage):
-                    ai_message = before_message
-                else:
-                    ai_message = last_ai_message_call_tools
+#                 # Manual create AIMessage for ToolMessage
+#                 tool_calls = []
+#                 tool_calls_additional_kwargs = []
 
-                # Manual create AIMessage for ToolMessage
-                tool_calls = []
-                tool_calls_additional_kwargs = []
+#                 # Find tool_calls data from last AI message
+#                 if ai_message.tool_calls:
+#                     for tool_call in ai_message.tool_calls:
+#                         if tool_call["id"] == msg.tool_call_id:
+#                             tool_calls.append(tool_call)
 
-                # Find tool_calls data from last AI message
-                if ai_message.tool_calls:
-                    for tool_call in ai_message.tool_calls:
-                        if tool_call["id"] == msg.tool_call_id:
-                            tool_calls.append(tool_call)
+#                 if ai_message.additional_kwargs.get("tool_calls"):
+#                     for tool_call_additional_kwargs in ai_message.additional_kwargs["tool_calls"]:
+#                         if tool_call_additional_kwargs["id"] == msg.tool_call_id:
+#                             tool_calls_additional_kwargs.append(tool_call_additional_kwargs)
 
-                if ai_message.additional_kwargs.get("tool_calls"):
-                    for tool_call_additional_kwargs in ai_message.additional_kwargs["tool_calls"]:
-                        if tool_call_additional_kwargs["id"] == msg.tool_call_id:
-                            tool_calls_additional_kwargs.append(tool_call_additional_kwargs)
+#                 tool_ai_message = AIMessage(
+#                     content="",
+#                     tool_calls=tool_calls,
+#                     additional_kwargs={"tool_calls": tool_calls_additional_kwargs}
+#                 )
 
-                tool_ai_message = AIMessage(
-                    content="",
-                    tool_calls=tool_calls,
-                    additional_kwargs={"tool_calls": tool_calls_additional_kwargs}
-                )
+#             clean_messages.append(tool_ai_message)
+#             clean_messages.append(msg)
+#         else:
+#             clean_messages.append(msg)
 
-            clean_messages.append(tool_ai_message)
-            clean_messages.append(msg)
-        else:
-            clean_messages.append(msg)
-
-    state["messages"] = clean_messages
-    return state
+#     state["messages"] = clean_messages
+#     return state
 
 
 def handle_keep_recent_messages(
