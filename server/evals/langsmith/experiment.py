@@ -34,7 +34,7 @@ def target_function(inputs: dict):
 
 
 client = Client()
-dataset_name = "ecommerce-agent-dataset-with-fine-tuned-model"
+dataset_name = "Ecommerce Agent Dataset With Fine Tuned Model"
 evaluate(
     target_function,
     data=dataset_name,
@@ -46,9 +46,9 @@ evaluate(
 
 # # TASK: Run 1 example with ID
 # # "Ecommerce Golden Data Set"
-# dataset_id = "12e5f450-fac3-4b2c-b167-4a80c1c6b386"
+# dataset_id = "05306da6-f37c-4765-9d28-928ca47a49b5"
 # # Give me list of policies
-# example_id = "d5dd3bc6-3646-4f41-b63c-eaabd5d62e86"
+# example_id = "40176d4a-7f5e-4be4-bea4-089547b1bf9c"
 # examples = client.list_examples(dataset_id=dataset_id)
 # for example in examples:
 #     if str(example.id) == example_id:
@@ -60,7 +60,7 @@ evaluate(
 #     data=[example_to_run],
 #     evaluators=[
 #         compare_semantic_similarity,
-#         is_concise_enough,
+#         # is_concise_enough,
 #         latency_evaluator
 #     ],
 #     experiment_prefix=f"Eval example {example_id}",

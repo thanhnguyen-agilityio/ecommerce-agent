@@ -47,7 +47,6 @@ async def process_response(response):
             continue
 
         if content["require_approval"]:
-            print("Verification required:", content)
             message = content["message"]
             tool_call_data = content["tool_call_data"]
             st.session_state.tool_call_id = tool_call_data["id"]
@@ -107,7 +106,6 @@ with st.spinner("Loading..."):
         history_message_convert = []
         for message in messages:
             message_convert = convert_chat_message(message["type"], message["content"])
-            # print("message_convert: ", message_convert)
             if message_convert:
                 history_message_convert.append(message_convert)
 
@@ -116,7 +114,6 @@ with st.spinner("Loading..."):
         pass
 
 # Show history messages to UI
-# print("history.messages: ", history.messages)
 for msg in history.messages:
     render_message(msg)
 

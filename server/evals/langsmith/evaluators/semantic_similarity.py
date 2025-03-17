@@ -1,7 +1,8 @@
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_openai import ChatOpenAI
-from langsmith.schemas import Example, Run
 from pydantic import BaseModel, Field
+
+from langsmith.schemas import Example, Run
 
 gpt_4o_mini = ChatOpenAI(model="gpt-4o-mini")
 gpt_3_5_turbo = ChatOpenAI(model="gpt-3.5-turbo")
@@ -22,7 +23,6 @@ def compare_semantic_similarity(root_run: Run, example: Example):
         reference_response = example.outputs["agent_response"]
         run_response = root_run.outputs["output"]
     except TypeError:
-        print("example:", example)
         raise ValueError("Invalid input or output format")
 
     messages = [
@@ -35,7 +35,12 @@ def compare_semantic_similarity(root_run: Run, example: Example):
             content=f"Question: {input_question}\n Reference Response: {reference_response}\n Run Response: {run_response}"
         ),
     ]
-    ai_message = model_evals.with_structured_output(Similarity_Score).invoke(messages)
+    try:
+        ai_message = model_evals.with_structured_output(Similarity_Score).invoke(messages)
+    except Exception as e:
+        # from remote_pdb import RemotePdb
+        # RemotePdb('127.0.0.1', 4444).set_trace()
+        raise ValueError(f"Error invoking model: {e}")
 
     score = ai_message.similarity_score
     return {"score": score, "key": "similarity"}

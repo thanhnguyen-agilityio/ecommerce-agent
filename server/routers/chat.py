@@ -3,13 +3,12 @@ import json
 from typing import AsyncGenerator
 
 from agent.graph import init_graph
+from agent.tools import sensitive_tool_names
 from fastapi import APIRouter
 from fastapi.responses import Response, StreamingResponse
 from langchain_core.messages import ToolMessage
 from schema.schema import ChatRequest, ToolCallApprovalRequest
 from utils.utils import build_require_approval_message
-from agent.tools import sensitive_tool_names
-
 
 router = APIRouter(prefix="/chat", tags=[""])
 
@@ -104,7 +103,6 @@ async def chat_stream(request: ChatRequest):
 @router.post("/approve")
 async def approve_action(request: ToolCallApprovalRequest):
     """Approve tool call"""
-    print("Approve tool call!")
     config = {
         "configurable": {
             "thread_id": request.thread_id,
@@ -119,7 +117,6 @@ async def approve_action(request: ToolCallApprovalRequest):
 @router.post("/reject")
 async def reject_action(request: ToolCallApprovalRequest):
     """Reject tool call"""
-    print("Reject tool call!")
     config = {
         "configurable": {
             "thread_id": request.thread_id,

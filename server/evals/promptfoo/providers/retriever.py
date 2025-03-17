@@ -20,7 +20,6 @@ from rag.retriever import get_retriever  # noqa: E402
 def call_api(query, options, context):
     context_vars = context["vars"]
     persist_directory = f"{server_path}/db/embeddings/ivy_vector_store"
-    print("persist_directory:::", persist_directory)
     collection_name = "ivy_collections"
 
     query = context_vars["query"]

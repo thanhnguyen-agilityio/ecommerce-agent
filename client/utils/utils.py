@@ -9,15 +9,13 @@ def get_session_id():
 
 
 def convert_chat_message(message_type, content):
-    # print("message_type: ", message_type)
-    # print("content: ", content)
     match message_type:
         case "human":
             return ChatMessage(role="user", content=content)
         case "ai":
             return ChatMessage(role="assistant", content=content)
-        # case _:
-        #     return ChatMessage(role="unknown", content=content)
+        case _:
+            return ChatMessage(role="unknown", content=content)
 
 
 def get_chat_message_avatar(msg):

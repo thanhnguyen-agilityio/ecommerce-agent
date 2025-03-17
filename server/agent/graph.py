@@ -1,5 +1,10 @@
+import os
 import sqlite3
 
+import utils.constants as constants
+from agent.llms import init_chat_model, model_gpt_4o_mini
+from agent.prompts.prompt import get_chat_prompt, get_system_message
+from agent.tools import safe_tools, sensitive_tool_names, sensitive_tools, tools_mapping
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain_community.cache import SQLiteCache
 from langchain_core.globals import set_llm_cache
@@ -9,23 +14,21 @@ from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.graph import END, START, MessagesState, StateGraph
 from langgraph.prebuilt import tools_condition
 from langgraph.store.memory import InMemoryStore
-
-import utils.constants as constants
 from utils.utils import (
     create_tool_node_with_fallback,
     get_path,
-    handle_keep_recent_messages
+    handle_keep_recent_messages,
 )
-from agent.llms import init_chat_model, model_gpt_4o_mini
-from agent.prompts.prompt import get_chat_prompt, get_system_message
-from agent.tools import safe_tools, sensitive_tool_names, sensitive_tools, tools_mapping
 
 # Initialize store, memory, and cache
 store = InMemoryStore()
 memory = SqliteSaver(
     sqlite3.connect(get_path("checkpoints.sqlite", "db"), check_same_thread=False)
 )
-set_llm_cache(SQLiteCache(database_path="db/ecommerce_chatbot_cache.db"))
+
+if os.getenv('RUN_EVALUATION') == "false":
+    # Only set cache when not running evaluation
+    set_llm_cache(SQLiteCache(database_path="db/ecommerce_chatbot_cache.db"))
 
 
 class State(MessagesState):
@@ -170,7 +173,7 @@ def init_graph(
         checkpointer=memory,
         store=store,
         interrupt_before=["sensitive_tools"],
-        debug=True,
+        # debug=True,
     )
 
     # For testing graph visualization

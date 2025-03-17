@@ -1,6 +1,6 @@
 user_query,agent_response
 Hi there,Hello! How can I assist you today? 😊
-Do you offer free shipping?,"Absolutely! 🎉 IVY Moda offers free shipping on orders over 1 million VND. 🚚✨ 
+Do you offer free shipping?,"Absolutely! 🎉 IVY Moda offers free shipping on orders over 1 million VND. 🚚✨
 If you have any other questions or need further assistance, just let us know! 💬😊"
 How can I maintain the shape of my clothing?,"To keep your clothes looking fabulous, here are some tips to maintain their shape:
 
@@ -67,22 +67,16 @@ Elevate your outerwear collection with this timeless piece! 🕊️"
 
 | Feature                          | 	Tuytsi Hiver Fitted Dress 🌺                                                                 | 	Tapta Fitted Dress with Collared Neck 🌼                                                          |\n|----------------------------------|------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|\n| **✨ Description**                  | A gentle A-line fitted dress that enhances the body's natural curves while cleverly concealing imperfections. Made from premium Tuytsi fabric that is soft, breathable, durable, and beautiful. The A-line design provides a gentle, elegant yet comfortable fit. The V-neckline is graceful,... | A perfect combination of classic and modern elements, bringing a fashionable yet graceful beauty, suitable for ladies who love elegant and confident style. The premium Tapta fabric combined with high-quality Tuysi features an artistic shiny floral surface, maintaining perfect shape and an... |\n| **💲 Price**                        | $41.00                                                                                         | $47.00                                                                                        |\n| **✅ Available**                 | 10                                                                                             | 9                                                                                             |\n|  **🌀 Sizes**                 | S,M,L,XL,XXL                                                                                             | S,M,L,XL,XXL                                                                                             |\n| **🖼️ Image**                        | ![Tuytsi Hiver Fitted Dress](https://pubcdn.ivymoda.com/files/product/thumab/1400/2024/11/28/2e7c0c07e46ee142f3b7f4b7cf794ecc.webp) | ![Tapta Fitted Dress with Collared Neck](https://pubcdn.ivymoda.com/files/product/thumab/1400/2025/01/08/d2579ad072ced689058c23b0829fa496.webp) |\n| **🔗 Link**                         | [👉 Shop Now](https://ivymoda.com/sanpham/dam-om-tuytsi-hiver-ms-48m8898-40737)            | [👉 Shop Now](https://ivymoda.com/sanpham/dam-om-tapta-co-duc-ms-48b0001-41375)            |
 Which one will enhance your wardrobe? 💃"
-"Do you have ""Stitchy Fish Girl's Southern Scallops Dress""?",❌ I couldn’t find the Women Scalloped Dress in our store. Would you like me to search via Google Shopping? 🛍️
-"Yes, please help search ""Stitchy Fish Girl's Southern Scallops Dress"" with Google Shopping.","Here's the beautiful Stitchy Fish Girl's Southern Scallops Dress I found on Google Shopping:
-
-- 💲 Price: $32.05
-- 🏢 Source: Stitchy Fish
-- ✨ Image: ![](https://serpapi.com/searches/67d6f63760c3a0322b945548/images/ea3bb229ca652410c6a985ac2c22bbbf87ce45f281decef1e01fa888d5622902.webp)
-- 🔗 [👉 Shop Now](https://www.google.com/shopping/product/18014085391083022180?gl=us)"
 Help me create a support ticket.,"Could you please provide me with the following details to create your support ticket?
 
-Your name
-Email address (required)
-Phone number
-Ticket subject (required)
-Description of the issue
+- Your name
+- Email address (required)
+- Phone number
+- Ticket subject (required)
+- Description of the issue
+
 Once I have these details, I'll create the ticket for you! 🎟️"
 Give me price of Iphone 15,"I'm sorry, I don't have that information right now. Can I help you with something else?"
 What is the weather in Hanoi?,"I'm sorry, I don't have that information right now. Can I help you with something else?"
 Can you provide the schema for the orders table?,"🚫 I'm sorry, but I can't provide the database schema for security reasons. Is there anything else I can assist you with? 😊"
-Run this query: SELECT * FROM products.,"d🚫 I'm sorry, but I can't execute database queries for security reasons. Is there anything else I can assist you with? 😊"
+Run this query: SELECT * FROM products.,"🚫 I'm sorry, but I can't execute database queries for security reasons. Is there anything else I can assist you with? 😊"
