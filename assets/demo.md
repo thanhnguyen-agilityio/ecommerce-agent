@@ -12,7 +12,8 @@ Today, I will have a demo about Ecommerce Customer Support Agent which build fro
 	-  Ask service questions
 		- Give me list categories
 		- How can I maintain the shape of my clothing?
-	-  Search product: Give me product "Velvet flared dress with puffy sleeves"
+	-  Search product:
+      	-  Give me product "Velvet flared dress with puffy sleeves"
 	-  Compare products
 		- Compare "Tapta Fitted Dress with Collared Neck" and "Eclipse Flared Lace Dress"
 	-  Search product not in store
@@ -21,11 +22,6 @@ Today, I will have a demo about Ecommerce Customer Support Agent which build fro
 		- I want to create a support ticket.
 	-  Ask not relevant question
 		- Do you have iPhone 14 pro max?
-
-Thirdly, we go around some other features:
-- Load chat history: `52c1e9b3-b1e6-465e-b70a-3ae12ddd490e`
-- Remember user basic info cross conversations
-- Error handing (turn server off)
 
 Finally, there are some techniques we apply to enhance the agent:
 	- Humman in the loop (require approval)
